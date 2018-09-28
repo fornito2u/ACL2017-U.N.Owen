@@ -1,8 +1,8 @@
 Projet d'analyse et conception de logiciel
 
-Membres de l'équipes :
+Membres de l'Ã©quipes :
 - Marvin Fornito
--
+- Darmois Victor
 -
 -
 
