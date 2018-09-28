@@ -4,5 +4,5 @@ Membres de l'équipes :
 - Marvin Fornito
 - Darmois Victor
 - Clément Koch
--
+- Clément Bellanger
 
