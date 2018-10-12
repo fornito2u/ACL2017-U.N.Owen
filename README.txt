@@ -2,7 +2,7 @@ Projet d'analyse et conception de logiciel
 
 Membres de l'équipes :
 - Marvin Fornito
-- Darmois Victor
+- Victor Darmois
 - Clément Koch
 - Clément Bellanger
 
