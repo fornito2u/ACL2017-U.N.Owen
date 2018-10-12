@@ -16,7 +16,7 @@ Coordonnees x,y
 Entier pointdevie
 
 }
-class Phantome{
+class Fantome{
 
 }
 
@@ -48,7 +48,7 @@ class CaseMur{
 Hero --|> Personnage
 Monstre --|> Personnage
 Monstre "*"-- Jeu
-Phantome --|> Monstre
+Fantome --|> Monstre
 Hero "1" -- Jeu
 Labyrinthe "*" -- Jeu
 Case "*" -- Labyrinthe
