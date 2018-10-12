@@ -18,6 +18,9 @@ public class MazeGame implements Game {
 
 	private HeroPainter heroPainter;
 
+	public static int LIMITE_X=100;
+	public static int LIMITE_Y=100;
+
 	/**
 	 * constructeur avec fichier source pour le help
 	 * 

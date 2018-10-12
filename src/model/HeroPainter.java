@@ -37,8 +37,15 @@ public class HeroPainter implements GamePainter {
 	}
 
 	public void deplacer(int x,int y) {
-		this.x += x;
-		this.y += y;
+		if ((this.x+x>=0) && (this.x+x<MazeGame.LIMITE_X)) {
+			this.x += x;
+			System.out.println("X : "+this.x);
+		}
+
+		if ((this.y+y>=0) && (this.y+y<MazeGame.LIMITE_Y)) {
+			this.y += y;
+			System.out.println("Y : "+this.y);
+		}
 	}
 
 	/**
