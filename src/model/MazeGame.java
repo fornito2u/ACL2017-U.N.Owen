@@ -14,14 +14,17 @@ import engine.Game;
  *         versions suivantes.
  * 
  */
-public class PacmanGame implements Game {
+public class MazeGame implements Game {
+
+	private HeroPainter heroPainter;
 
 	/**
 	 * constructeur avec fichier source pour le help
 	 * 
 	 */
-	public PacmanGame(String source) {
+	public MazeGame(String source, HeroPainter hero) {
 		BufferedReader helpReader;
+		heroPainter=hero;
 		try {
 			helpReader = new BufferedReader(new FileReader(source));
 			String ligne;
@@ -43,13 +46,13 @@ public class PacmanGame implements Game {
 	public void evolve(Cmd commande) {
 		System.out.println("Execute "+commande);
 		if (commande.equals(Cmd.UP)) {
-			pacman.deplacer(0,PacmanPainter.UNITE_DEPLACEMENT);
+			heroPainter.deplacer(0, -HeroPainter.UNITE_DEPLACEMENT);
 		} else if (commande.equals(Cmd.DOWN)) {
-			pacman.deplacer(0,-PacmanPainter.UNITE_DEPLACEMENT);
+			heroPainter.deplacer(0,HeroPainter.UNITE_DEPLACEMENT);
 		} else if (commande.equals(Cmd.LEFT)) {
-			pacman.deplacer(-PacmanPainter.UNITE_DEPLACEMENT,0);
+			heroPainter.deplacer(-HeroPainter.UNITE_DEPLACEMENT,0);
 		} else if (commande.equals(Cmd.RIGHT)) {
-			pacman.deplacer(PacmanPainter.UNITE_DEPLACEMENT,0);
+			heroPainter.deplacer(HeroPainter.UNITE_DEPLACEMENT,0);
 		}
 	}
 
