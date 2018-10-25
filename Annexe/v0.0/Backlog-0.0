@@ -1,7 +1,7 @@
 Backlog de la version 0.0 :
-- Création du projet et du répertoire Github (Marvin Fornito)
-- Diagramme de classes (Fornito Marvin)
-- Liste des fonctionnalités (Fornito Marvin)
+- Création du projet + Gestion du répertoire Github + Création du backlog de la version 0.0 (Fornito Marvin)
+- Création du diagramme de classes global du projet (Fornito Marvin)
+- Rédaction du fichier "Liste des fonctionnalités" (Fornito Marvin)
 - Deplacement du personnage via les touches zqsd (Bellanger Clément)
 - Deplacement du personnage via les fleches directionnelles (Bellanger Clément)
 - Affichage du deplacement du personnage sur une interface  (Bellanger Clément)
