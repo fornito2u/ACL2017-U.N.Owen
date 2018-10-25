@@ -24,6 +24,7 @@ public class HeroPainter implements GamePainter {
 
 	private int x;
 	private int y;
+	private int pv;
 
 	/**
 	 * appelle constructeur parent
@@ -34,6 +35,7 @@ public class HeroPainter implements GamePainter {
 	public HeroPainter() {
 		this.x=0;
 		this.y=0;
+		this.pv = 30;
 	}
 
 	public void deplacer(int x,int y) {
@@ -56,6 +58,11 @@ public class HeroPainter implements GamePainter {
 		Graphics2D crayon = (Graphics2D) im.getGraphics();
 		crayon.setColor(Color.blue);
 		crayon.fillOval(x,y,10,10);
+		if(pv>0)
+		{
+			crayon.setColor(Color.red);
+			crayon.fillRect(x, y-10, this.pv, 5);
+		}
 	}
 
 	@Override
