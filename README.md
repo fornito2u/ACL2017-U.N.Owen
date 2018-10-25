@@ -6,7 +6,7 @@ Marvin Fornito, Victor DARMOIS, Clément BELLANGER, Clément KOCH
 
 ## Pré-requis
 
-Pré-requis : java 8, ant
+Java 8, Ant
 
 ### Installer ant sous windows :
 
@@ -22,7 +22,8 @@ Pré-requis : java 8, ant
 
 - Sans droits admin
 	* Se placer dans le dossier du projet (celui avec le build.xml) et exécuter "$chemin\apache-ant-1.10.5\bin\ant"
-### Installer les dépendances :
+
+### Installer les dépendances sous linux :
 
 #### RedHat/Fedora
 
