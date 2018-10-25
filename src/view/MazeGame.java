@@ -19,8 +19,8 @@ public class MazeGame implements Game {
 
 	private HeroPainter heropainter;
 
-	public static int LIMITE_X=100;
-	public static int LIMITE_Y=100;
+	private int limiteX;
+	private int limiteY;
 
 	/**
 	 * constructeur avec fichier source pour le help
@@ -29,6 +29,8 @@ public class MazeGame implements Game {
 	public MazeGame(String source, HeroPainter heropainter) {
 		BufferedReader helpReader;
 		this.heropainter=heropainter;
+		this.limiteX = heropainter.getWidth();
+		this.limiteY = heropainter.getHeight();
 		try {
 			helpReader = new BufferedReader(new FileReader(source));
 			String ligne;
@@ -67,6 +69,22 @@ public class MazeGame implements Game {
 	public boolean isFinished() {
 		// le jeu n'est jamais fini
 		return false;
+	}
+
+	public int getLimiteX() {
+		return limiteX;
+	}
+
+	public void setLimiteX(int limiteX) {
+		this.limiteX = limiteX;
+	}
+
+	public int getLimiteY() {
+		return limiteY;
+	}
+
+	public void setLimiteY(int limiteY) {
+		this.limiteY = limiteY;
 	}
 
 }

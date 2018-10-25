@@ -20,8 +20,8 @@ public class HeroPainter implements GamePainter {
 	 */
 
 	protected static final int UNITE_DEPLACEMENT=10;
-	protected static final int WIDTH = 100;
-	protected static final int HEIGHT = 100;
+	protected static final int WIDTH = 800;
+	protected static final int HEIGHT = 500;
 
 	private Hero hero;
 	
