@@ -1,4 +1,4 @@
-package model;
+package controler;
 
 import java.awt.event.KeyEvent;
 

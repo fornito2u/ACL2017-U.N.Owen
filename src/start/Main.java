@@ -1,9 +1,10 @@
 package start;
 
-import model.HeroPainter;
+import controler.HeroController;
 import engine.GameEngineGraphical;
-import model.HeroController;
-import model.MazeGame;
+import model.Hero;
+import view.HeroPainter;
+import view.MazeGame;
 
 /**
  * lancement du moteur avec le jeu
@@ -11,7 +12,8 @@ import model.MazeGame;
 public class Main {
 
 	public static void main(String[] args) throws InterruptedException {
-		HeroPainter painter = new HeroPainter();
+		Hero hero = new Hero();
+		HeroPainter painter = new HeroPainter(hero);
 		HeroController controller = new HeroController();
 
 		// creation du jeu particulier et de son afficheur

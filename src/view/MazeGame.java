@@ -1,4 +1,4 @@
-package model;
+package view;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import engine.Cmd;
 import engine.Game;
+import model.Hero;
 
 /**
  * @author Horatiu Cirstea, Vincent Thomas
@@ -16,7 +17,7 @@ import engine.Game;
  */
 public class MazeGame implements Game {
 
-	private HeroPainter heroPainter;
+	private HeroPainter heropainter;
 
 	public static int LIMITE_X=100;
 	public static int LIMITE_Y=100;
@@ -25,9 +26,9 @@ public class MazeGame implements Game {
 	 * constructeur avec fichier source pour le help
 	 * 
 	 */
-	public MazeGame(String source, HeroPainter hero) {
+	public MazeGame(String source, HeroPainter heropainter) {
 		BufferedReader helpReader;
-		heroPainter=hero;
+		this.heropainter=heropainter;
 		try {
 			helpReader = new BufferedReader(new FileReader(source));
 			String ligne;
@@ -49,13 +50,13 @@ public class MazeGame implements Game {
 	public void evolve(Cmd commande) {
 		System.out.println("Execute "+commande);
 		if (commande.equals(Cmd.UP)) {
-			heroPainter.deplacer(0, -HeroPainter.UNITE_DEPLACEMENT);
+			this.heropainter.getHero().deplacer(0, -HeroPainter.UNITE_DEPLACEMENT);
 		} else if (commande.equals(Cmd.DOWN)) {
-			heroPainter.deplacer(0,HeroPainter.UNITE_DEPLACEMENT);
+			this.heropainter.getHero().deplacer(0,HeroPainter.UNITE_DEPLACEMENT);
 		} else if (commande.equals(Cmd.LEFT)) {
-			heroPainter.deplacer(-HeroPainter.UNITE_DEPLACEMENT,0);
+			this.heropainter.getHero().deplacer(-HeroPainter.UNITE_DEPLACEMENT,0);
 		} else if (commande.equals(Cmd.RIGHT)) {
-			heroPainter.deplacer(HeroPainter.UNITE_DEPLACEMENT,0);
+			this.heropainter.getHero().deplacer(HeroPainter.UNITE_DEPLACEMENT,0);
 		}
 	}
 

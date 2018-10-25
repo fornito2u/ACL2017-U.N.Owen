@@ -1,10 +1,11 @@
-package model;
+package view;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import engine.GamePainter;
+import model.Hero;
 
 /**
  * @author Horatiu Cirstea, Vincent Thomas
@@ -22,33 +23,28 @@ public class HeroPainter implements GamePainter {
 	protected static final int WIDTH = 100;
 	protected static final int HEIGHT = 100;
 
-	private int x;
-	private int y;
-	private int pv;
-
-	/**
-	 * appelle constructeur parent
-	 * 
-	 * @param game
-	 *            le jeutest a afficher
-	 */
-	public HeroPainter() {
-		this.x=0;
-		this.y=0;
-		this.pv = 30;
+	private Hero hero;
+	
+	public HeroPainter(Hero hero)
+	{
+		this.hero = hero;
 	}
 
-	public void deplacer(int x,int y) {
-		if ((this.x+x>=0) && (this.x+x<MazeGame.LIMITE_X)) {
-			this.x += x;
-			System.out.println("X : "+this.x);
-		}
 
-		if ((this.y+y>=0) && (this.y+y<MazeGame.LIMITE_Y)) {
-			this.y += y;
-			System.out.println("Y : "+this.y);
-		}
+	public Hero getHero() {
+		return hero;
 	}
+
+
+	public void setHero(Hero hero) {
+		this.hero = hero;
+	}
+
+
+	public static int getUniteDeplacement() {
+		return UNITE_DEPLACEMENT;
+	}
+
 
 	/**
 	 * methode  redefinie de Afficheur retourne une image du jeu
@@ -57,11 +53,11 @@ public class HeroPainter implements GamePainter {
 	public void draw(BufferedImage im) {
 		Graphics2D crayon = (Graphics2D) im.getGraphics();
 		crayon.setColor(Color.blue);
-		crayon.fillOval(x,y,10,10);
-		if(pv>0)
+		crayon.fillOval(this.hero.getX(),this.hero.getY(),10,10);
+		if(this.hero.getPv()>0)
 		{
 			crayon.setColor(Color.red);
-			crayon.fillRect(x, y-10, this.pv, 5);
+			crayon.fillRect(this.hero.getX(), this.hero.getY()-10, this.hero.getPv(), 5);
 		}
 	}
 
