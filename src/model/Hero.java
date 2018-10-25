@@ -27,8 +27,8 @@ public class Hero extends Personnage {
 	
 
 	@Override
-	public void attaquer() {
-		
+	public void attaquer(Personnage p) {
+		p.setPv(p.getPv()-1);
 	}
 	
 	

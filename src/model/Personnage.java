@@ -36,6 +36,7 @@ public abstract class Personnage {
 		this.pv = pv;
 	}
 
-	abstract public void attaquer();
+	abstract public void attaquer(Personnage p);
+
 	
 }
