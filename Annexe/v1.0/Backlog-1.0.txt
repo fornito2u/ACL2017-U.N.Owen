@@ -1,4 +1,6 @@
 Backlog de la version 1.0 (Sprint 1) :
+- Rédaction du backlog de la version 1.0 (Fornito Marvin)
+- Création du diagramme de classes de la version 1.0 (Fornito Marvin)
 - Gestion et affichage de la vie du héro. (Fornito Marvin)
 - Création de la classe abstraite personnage (Fornito Marvin)
 - Création de la classe héro (Fornito Marvin)
