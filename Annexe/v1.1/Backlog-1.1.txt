@@ -1,0 +1,5 @@
+Fonctionnalités de la version 1.2 :
+- Déplacement du personnage via les touches “zqsd”
+- Déplacement du personnage via les flèches directionnelles
+- Affichage du déplacement du personnage sur une interface
+- Gestion des bordures de la carte
