@@ -19,7 +19,7 @@ public class HeroPainter implements GamePainter {
 	 * la taille des cases
 	 */
 
-	protected static final int UNITE_DEPLACEMENT=10;
+	public static final int UNITE_DEPLACEMENT=10;
 	protected static final int WIDTH = 800;
 	protected static final int HEIGHT = 500;
 

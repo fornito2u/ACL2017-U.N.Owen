@@ -1,12 +1,10 @@
 package model;
 
-import view.MazeGame;
-
 public class Hero extends Personnage {
 
-	private Jeu jeu;
+	private MazeGame jeu;
 	
-	public Hero(Jeu jeu) {
+	public Hero(MazeGame jeu) {
 		super();
 		this.jeu = jeu;
 		this.x = 0;
@@ -15,12 +13,12 @@ public class Hero extends Personnage {
 	
 	@Override
 	public void deplacer(int x,int y) {
-		if ((this.x+x>=0) && (this.x+x<this.jeu.getGame().getLimiteX())) {
+		if ((this.x+x>=0) && (this.x+x<this.jeu.getLimiteX())) {
 			this.x += x;
 			System.out.println("X : "+this.x);
 		}
 
-		if ((this.y+y>=0) && (this.y+y<this.jeu.getGame().getLimiteY())) {
+		if ((this.y+y>=0) && (this.y+y<this.jeu.getLimiteY())) {
 			this.y += y;
 			System.out.println("Y : "+this.y);
 		}
@@ -30,7 +28,6 @@ public class Hero extends Personnage {
 
 	@Override
 	public void attaquer() {
-		// TODO Auto-generated method stub
 		
 	}
 	
