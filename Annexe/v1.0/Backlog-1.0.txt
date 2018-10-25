@@ -1,0 +1,7 @@
+Backlog de la version 1.0 :(Sprint 1) :
+- Gestion et affichage de la vie du héro. (Fornito Marvin)
+- Implémentation du pattern MVC. (Fornito Marvin et Koch Clément)
+- Création de la classe abstraite personnage
+- Création de la casse monstre
+- Test unitaire (Bellanger Clément)
+- Labyrinthe simple (Koch Clément)

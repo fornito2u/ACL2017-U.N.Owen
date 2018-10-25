@@ -1,6 +1,0 @@
-Fonctionnalit�s de la version 1.2 :
-- D�placement du personnage via les touches �zqsd�
-- D�placement du personnage via les fl�ches directionnelles
-- Affichage du d�placement du personnage sur une interface
-- Gestion des bordures de la carte
-- Gestion et affichage de la vie du héro.
