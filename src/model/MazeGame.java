@@ -16,6 +16,7 @@ public class MazeGame implements Game {
 	private Hero hero;
 	private HeroPainter painter;
 	private HeroController controller;
+	private Labyrinthe labyrinthe;
 	private int limiteX;
 	private int limiteY;
 	
@@ -23,10 +24,12 @@ public class MazeGame implements Game {
 	{
 		this.hero = new Hero(this);
 		this.controller = new HeroController();
-		BufferedReader helpReader;
+		this.labyrinthe = new Labyrinthe();
 		this.painter = new HeroPainter(hero);
 		this.limiteX = painter.getWidth();
 		this.limiteY = painter.getHeight();
+		
+		BufferedReader helpReader;
 		try {
 			helpReader = new BufferedReader(new FileReader(source));
 			String ligne;
