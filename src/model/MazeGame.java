@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import controler.HeroController;
 import engine.GameEngineGraphical;
-import view.LabyinthePainter;
+import view.LabyrinthePainter;
 import engine.Cmd;
 import engine.Game;
 import model.Hero;
@@ -14,7 +14,7 @@ import model.Hero;
 public class MazeGame implements Game {
 	
 	private Hero hero;
-	private LabyinthePainter painter;
+	private LabyrinthePainter painter;
 	private HeroController controller;
 	private Labyrinthe labyrinthe;
 	private int limiteX;
@@ -24,8 +24,9 @@ public class MazeGame implements Game {
 	{
 		this.hero = new Hero(this);
 		this.controller = new HeroController();
-		this.labyrinthe = new Labyrinthe();
-		this.painter = new LabyinthePainter(hero);
+		this.painter = new LabyrinthePainter(hero);
+		this.labyrinthe = new Labyrinthe(painter.getHeight()/10, painter.getWidth()/10);
+		this.painter.add(this.labyrinthe);
 		this.limiteX = painter.getWidth();
 		this.limiteY = painter.getHeight();
 		
@@ -64,13 +65,13 @@ public class MazeGame implements Game {
 	public void evolve(Cmd commande) {
 		System.out.println("Execute "+commande);
 		if (commande.equals(Cmd.UP)) {
-			this.painter.getHero().deplacer(0, -LabyinthePainter.UNITE_DEPLACEMENT);
+			this.painter.getHero().deplacer(0, -LabyrinthePainter.UNITE_DEPLACEMENT);
 		} else if (commande.equals(Cmd.DOWN)) {
-			this.painter.getHero().deplacer(0,LabyinthePainter.UNITE_DEPLACEMENT);
+			this.painter.getHero().deplacer(0,LabyrinthePainter.UNITE_DEPLACEMENT);
 		} else if (commande.equals(Cmd.LEFT)) {
-			this.painter.getHero().deplacer(-LabyinthePainter.UNITE_DEPLACEMENT,0);
+			this.painter.getHero().deplacer(-LabyrinthePainter.UNITE_DEPLACEMENT,0);
 		} else if (commande.equals(Cmd.RIGHT)) {
-			this.painter.getHero().deplacer(LabyinthePainter.UNITE_DEPLACEMENT,0);
+			this.painter.getHero().deplacer(LabyrinthePainter.UNITE_DEPLACEMENT,0);
 		}
 	}
 
@@ -98,5 +99,15 @@ public class MazeGame implements Game {
 	public void setLimiteY(int limiteY) {
 		this.limiteY = limiteY;
 	}
+	
+	public Labyrinthe getLabyrinthe() {
+		return labyrinthe;
+	}
+
+
+	public void setLabyrinthe(Labyrinthe labyrinthe) {
+		this.labyrinthe = labyrinthe;
+	}
+
 
 }
