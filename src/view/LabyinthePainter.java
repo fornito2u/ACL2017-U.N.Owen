@@ -13,19 +13,19 @@ import model.Hero;
  * afficheur graphique pour le game
  * 
  */
-public class HeroPainter implements GamePainter {
+public class LabyinthePainter implements GamePainter {
 
 	/**
 	 * la taille des cases
 	 */
 
-	public static final int UNITE_DEPLACEMENT=10;
+	public static final int UNITE_DEPLACEMENT=5;
 	protected static final int WIDTH = 800;
 	protected static final int HEIGHT = 500;
 
 	private Hero hero;
 	
-	public HeroPainter(Hero hero)
+	public LabyinthePainter(Hero hero)
 	{
 		this.hero = hero;
 	}
@@ -57,7 +57,7 @@ public class HeroPainter implements GamePainter {
 		if(this.hero.getPv()>0)
 		{
 			crayon.setColor(Color.red);
-			crayon.fillRect(this.hero.getX(), this.hero.getY()-10, this.hero.getPv(), 5);
+			crayon.fillRect(10, 10, this.hero.getPv()*10, 5);
 		}
 	}
 

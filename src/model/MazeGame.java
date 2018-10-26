@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import controler.HeroController;
 import engine.GameEngineGraphical;
-import view.HeroPainter;
+import view.LabyinthePainter;
 import engine.Cmd;
 import engine.Game;
 import model.Hero;
@@ -14,7 +14,7 @@ import model.Hero;
 public class MazeGame implements Game {
 	
 	private Hero hero;
-	private HeroPainter painter;
+	private LabyinthePainter painter;
 	private HeroController controller;
 	private Labyrinthe labyrinthe;
 	private int limiteX;
@@ -25,7 +25,7 @@ public class MazeGame implements Game {
 		this.hero = new Hero(this);
 		this.controller = new HeroController();
 		this.labyrinthe = new Labyrinthe();
-		this.painter = new HeroPainter(hero);
+		this.painter = new LabyinthePainter(hero);
 		this.limiteX = painter.getWidth();
 		this.limiteY = painter.getHeight();
 		
@@ -64,13 +64,13 @@ public class MazeGame implements Game {
 	public void evolve(Cmd commande) {
 		System.out.println("Execute "+commande);
 		if (commande.equals(Cmd.UP)) {
-			this.painter.getHero().deplacer(0, -HeroPainter.UNITE_DEPLACEMENT);
+			this.painter.getHero().deplacer(0, -LabyinthePainter.UNITE_DEPLACEMENT);
 		} else if (commande.equals(Cmd.DOWN)) {
-			this.painter.getHero().deplacer(0,HeroPainter.UNITE_DEPLACEMENT);
+			this.painter.getHero().deplacer(0,LabyinthePainter.UNITE_DEPLACEMENT);
 		} else if (commande.equals(Cmd.LEFT)) {
-			this.painter.getHero().deplacer(-HeroPainter.UNITE_DEPLACEMENT,0);
+			this.painter.getHero().deplacer(-LabyinthePainter.UNITE_DEPLACEMENT,0);
 		} else if (commande.equals(Cmd.RIGHT)) {
-			this.painter.getHero().deplacer(HeroPainter.UNITE_DEPLACEMENT,0);
+			this.painter.getHero().deplacer(LabyinthePainter.UNITE_DEPLACEMENT,0);
 		}
 	}
 

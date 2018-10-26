@@ -4,7 +4,7 @@ import controler.HeroController;
 import engine.GameEngineGraphical;
 import model.Hero;
 import model.MazeGame;
-import view.HeroPainter;
+import view.LabyinthePainter;
 
 /**
  * lancement du moteur avec le jeu
