@@ -1,6 +1,7 @@
 package model;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -20,15 +21,14 @@ public class MazeGame implements Game {
 	private int limiteX;
 	private int limiteY;
 	
-	public MazeGame(String source) 
+	public MazeGame(String source) throws IOException 
 	{
+		this.labyrinthe = new Labyrinthe(new File("labyrinthe.txt"));
 		this.hero = new Hero(this);
 		this.controller = new HeroController();
-		this.painter = new LabyrinthePainter(hero);
-		this.labyrinthe = new Labyrinthe(painter.getHeight()/10, painter.getWidth()/10);
-		this.painter.add(this.labyrinthe);
-		this.limiteX = painter.getWidth();
-		this.limiteY = painter.getHeight();
+		this.painter = new LabyrinthePainter(hero, labyrinthe);
+		this.limiteX = painter.getWidth()-20;
+		this.limiteY = painter.getHeight()-30;
 		
 		BufferedReader helpReader;
 		try {
@@ -63,7 +63,6 @@ public class MazeGame implements Game {
 	 */
 	@Override
 	public void evolve(Cmd commande) {
-		System.out.println("Execute "+commande);
 		if (commande.equals(Cmd.UP)) {
 			this.painter.getHero().deplacer(0, -LabyrinthePainter.UNITE_DEPLACEMENT);
 		} else if (commande.equals(Cmd.DOWN)) {

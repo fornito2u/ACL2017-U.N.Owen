@@ -1,5 +1,7 @@
 package start;
 
+import java.io.IOException;
+
 import controler.HeroController;
 import engine.GameEngineGraphical;
 import model.Hero;
@@ -11,7 +13,7 @@ import view.LabyrinthePainter;
  */
 public class Main {
 
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) throws InterruptedException, IOException {
 		// creation du jeu particulier et de son afficheur
 		MazeGame jeu = new MazeGame("helpFilePacman.txt");
 		jeu.start();

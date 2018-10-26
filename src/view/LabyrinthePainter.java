@@ -21,15 +21,14 @@ public class LabyrinthePainter implements GamePainter {
 	 */
 
 	public static final int UNITE_DEPLACEMENT=5;
-	protected static final int WIDTH = 800;
-	protected static final int HEIGHT = 500;
 
 	private Hero hero;
 	private Labyrinthe labyrinthe;
 	
-	public LabyrinthePainter(Hero hero)
+	public LabyrinthePainter(Hero hero, Labyrinthe lab)
 	{
 		this.hero = hero;
+		this.labyrinthe = lab;
 	}
 
 
@@ -56,10 +55,10 @@ public class LabyrinthePainter implements GamePainter {
 		Graphics2D crayon = (Graphics2D) im.getGraphics();
 		//Affichage du labyrinthe
 		crayon.setColor(Color.gray);
-		for(int i=0; i<this.getWidth()/10; i++) {
-			for(int j=0; j<this.getHeight()/10; j++) {
+		for(int i=0; i<(this.getWidth()-40)/10; i++) {
+			for(int j=0; j<(this.getHeight()-60)/10; j++) {
 				if(!this.labyrinthe.open(i, j)) {
-					crayon.fillRect(i*10, j*10, 10, 10);
+					crayon.fillRect(i*10+20, j*10+40, 10, 10);
 				}
 			}
 		}
@@ -72,7 +71,7 @@ public class LabyrinthePainter implements GamePainter {
 		if(this.hero.getPv()>0)
 		{
 			crayon.setColor(Color.red);
-			crayon.fillRect(10, 10, this.hero.getPv()*10, 5);
+			crayon.fillRect(20, 17, this.hero.getPv()*10, 5);
 		}
 		
 		
@@ -80,17 +79,11 @@ public class LabyrinthePainter implements GamePainter {
 
 	@Override
 	public int getWidth() {
-		return WIDTH;
+		return this.labyrinthe.getWidth()*10+40;
 	}
 
 	@Override
 	public int getHeight() {
-		return HEIGHT;
+		return this.labyrinthe.getHeight()*10+60;
 	}
-
-
-	public void add(Labyrinthe labyrinthe) {
-		this.labyrinthe = labyrinthe;
-	}
-
 }

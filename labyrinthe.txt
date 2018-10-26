@@ -1,0 +1,27 @@
+50
+25
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+X                         X                      X
+X   X       X        X                 X         X
+X                                                X
+X       X                          X         X   X
+X                          X            X        X
+X                 X                              X
+X                                                X
+X   X       X         X             X            X
+X     X                       X                  X
+X                                           X    X
+X                 X         X            X       X
+X              X                                 X
+X     X  X             X                         X
+X                X              X      X         X
+X                                                X
+X    X                       X                   X
+X                  X                 X      X    X
+X          X                                     X
+X      X                X      X           X     X
+X                  X                             X
+X            X                       X           X
+X   X     X               X                      X
+X                                                X
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX

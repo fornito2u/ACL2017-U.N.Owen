@@ -8,8 +8,8 @@ public class Hero extends Personnage {
 	public Hero(MazeGame jeu) {
 		super();
 		this.jeu = jeu;
-		this.x = 10;
-		this.y = 250;
+		this.x = 35;
+		this.y = (this.jeu.getLabyrinthe().getHeight()*10+60)/2;
 	}
 	
 	@Override
@@ -22,8 +22,8 @@ public class Hero extends Personnage {
 	
 	public boolean accessible(int x, int y) {
 		boolean res = true;
-		int destX = this.x+x;
-		int destY = this.y+y;
+		int destX = this.x+x-20;
+		int destY = this.y+y-40;
 		
 		//On teste les bordures
 		if ((destX<0) || (destX>this.jeu.getLimiteX()-diameter)) {
@@ -37,19 +37,19 @@ public class Hero extends Personnage {
 		if (!lab.open((int)Math.floor(destX/10),(int)Math.floor(destY/10))) {
 			res = false; 
 		}
-		if(destY > this.y && !lab.open((int)Math.floor(destX/10),(int)Math.floor((destY-1)/10+1))) {
+		if(this.y+y > this.y && !lab.open((int)Math.floor(destX/10),(int)Math.floor((destY-1)/10+1))) {
 			res = false; 
 		}
-		if(destX > this.x && !lab.open((int)Math.floor((destX-1)/10+1),(int)Math.floor(destY/10))) {
+		if(this.x+x > this.x && !lab.open((int)Math.floor((destX-1)/10+1),(int)Math.floor(destY/10))) {
 			res = false; 
 		}
-		if(destY < this.y && !lab.open((int)Math.floor((destX-1)/10+1),(int)Math.floor((destY)/10))) {
+		if(this.y+y < this.y && !lab.open((int)Math.floor((destX-1)/10+1),(int)Math.floor((destY)/10))) {
 			res = false; 
 		}
-		if(destX < this.x && !lab.open((int)Math.floor((destX)/10),(int)Math.floor((destY-1)/10+1))) {
+		if(this.x+x < this.x && !lab.open((int)Math.floor((destX)/10),(int)Math.floor((destY-1)/10+1))) {
 			res = false; 
 		}
-		if((destX > this.x ||  destY > this.y) && !lab.open((int)Math.floor((destX-1)/10+1),(int)Math.floor((destY-1)/10+1))) {
+		if((this.x+x > this.x ||  this.y+y > this.y) && !lab.open((int)Math.floor((destX-1)/10+1),(int)Math.floor((destY-1)/10+1))) {
 			res = false; 
 		}
 		return res;
