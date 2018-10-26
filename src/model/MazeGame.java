@@ -29,7 +29,6 @@ public class MazeGame implements Game {
 		this.painter = new LabyrinthePainter(hero, labyrinthe);
 		this.limiteX = painter.getWidth()-20;
 		this.limiteY = painter.getHeight()-30;
-		
 		BufferedReader helpReader;
 		try {
 			helpReader = new BufferedReader(new FileReader(source));
@@ -39,9 +38,16 @@ public class MazeGame implements Game {
 			}
 			helpReader.close();
 		} catch (IOException e) {
-			System.out.println("Help not available");
+			//System.out.println("Help not available");
 		}
 	}
+
+	
+
+	public Hero getHero() {
+		return hero;
+	}
+
 
 
 	public void start() 

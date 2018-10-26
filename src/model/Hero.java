@@ -27,15 +27,15 @@ public class Hero extends Personnage {
 		
 		//On teste les bordures
 		if ((destX<0) || (destX>this.jeu.getLimiteX()-diameter)) {
-			res = false;
+			return false;
 		} else if ((destY<0) || (destY>this.jeu.getLimiteY()-diameter)) {
-			res = false;
+			return false;
 		}
 		
 		//On teste le labyrinthe
 		Labyrinthe lab = this.jeu.getLabyrinthe();
 		if (!lab.open((int)Math.floor(destX/10),(int)Math.floor(destY/10))) {
-			res = false; 
+			return false;
 		}
 		if(this.y+y > this.y && !lab.open((int)Math.floor(destX/10),(int)Math.floor((destY-1)/10+1))) {
 			res = false; 
@@ -52,7 +52,7 @@ public class Hero extends Personnage {
 		if((this.x+x > this.x ||  this.y+y > this.y) && !lab.open((int)Math.floor((destX-1)/10+1),(int)Math.floor((destY-1)/10+1))) {
 			res = false; 
 		}
-		return res;
+		return true;
 	}
 	
 

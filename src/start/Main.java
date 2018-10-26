@@ -15,7 +15,7 @@ public class Main {
 
 	public static void main(String[] args) throws InterruptedException, IOException {
 		// creation du jeu particulier et de son afficheur
-		MazeGame jeu = new MazeGame("helpFilePacman.txt");
+		MazeGame jeu = new MazeGame("helpFilePacman.txt",System.nanoTime());
 		jeu.start();
 	}
 
