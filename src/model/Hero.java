@@ -14,19 +14,44 @@ public class Hero extends Personnage {
 	
 	@Override
 	public void deplacer(int x,int y) {
-		if ((this.x+x>=0) && (this.x+x<=this.jeu.getLimiteX()-diameter))/* && jeu.getLabyrinthe().open((int)Math.floor((this.x+x)/10),(int)Math.floor((this.y+y)/10)))*/ {
-			if (jeu.getLabyrinthe().open((int)Math.floor((this.x+x)/10),(int)Math.floor((this.y+y)/10))){
-				this.x += x;
-				//System.out.println("X : "+this.x);
-			}
+		if(this.accessible(x, y)) {
+			this.x += x;
+			this.y += y;
 		}
-
-		if ((this.y+y>=0) && (this.y+y<=this.jeu.getLimiteY()-diameter)) /*&& jeu.getLabyrinthe().open((int)Math.floor((this.x+x)/10),(int)Math.floor((this.y+y)/10)))*/ {
-			if (jeu.getLabyrinthe().open((int)Math.floor((this.x+x)/10),(int)Math.floor((this.y+y)/10))) {
-				this.y += y;
-				//System.out.println("Y : "+this.y);				
-			}
+	}
+	
+	public boolean accessible(int x, int y) {
+		int destX = this.x+x;
+		int destY = this.y+y;
+		
+		//On teste les bordures
+		if ((destX<0) || (destX>this.jeu.getLimiteX()-diameter)) {
+			return false;
+		} else if ((destY<0) || (destY>this.jeu.getLimiteY()-diameter)) {
+			return false;
 		}
+		
+		//On teste le labyrinthe
+		Labyrinthe lab = this.jeu.getLabyrinthe();
+		if (!lab.open((int)Math.floor(destX/10),(int)Math.floor(destY/10))) {
+			return false;
+		}
+		if(destY > this.y && !lab.open((int)Math.floor(destX/10),(int)Math.floor((destY-1)/10+1))) {
+			return false;
+		}
+		if(destX > this.x && !lab.open((int)Math.floor((destX-1)/10+1),(int)Math.floor(destY/10))) {
+			return false;
+		}
+		if(destY < this.y && !lab.open((int)Math.floor((destX-1)/10+1),(int)Math.floor((destY)/10))) {
+			return false;
+		}
+		if(destX < this.x && !lab.open((int)Math.floor((destX)/10),(int)Math.floor((destY-1)/10+1))) {
+			return false;
+		}
+		if((destX > this.x ||  destY > this.y) && !lab.open((int)Math.floor((destX-1)/10+1),(int)Math.floor((destY-1)/10+1))) {
+			return false;
+		}
+		return true;
 	}
 	
 
