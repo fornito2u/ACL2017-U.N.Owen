@@ -20,12 +20,12 @@ public class MazeGame implements Game {
 	private int limiteX;
 	private int limiteY;
 	
-	public MazeGame(String source) 
+	public MazeGame(String source, long seed) 
 	{
-		this.hero = new Hero(this);
+		this.hero = new Hero(this,10,250);
 		this.controller = new HeroController();
 		this.painter = new LabyrinthePainter(hero);
-		this.labyrinthe = new Labyrinthe(painter.getHeight()/10, painter.getWidth()/10);
+		this.labyrinthe = new Labyrinthe(painter.getHeight()/10, painter.getWidth()/10,seed);
 		this.painter.add(this.labyrinthe);
 		this.limiteX = painter.getWidth();
 		this.limiteY = painter.getHeight();
@@ -39,9 +39,16 @@ public class MazeGame implements Game {
 			}
 			helpReader.close();
 		} catch (IOException e) {
-			System.out.println("Help not available");
+			//System.out.println("Help not available");
 		}
 	}
+
+	
+
+	public Hero getHero() {
+		return hero;
+	}
+
 
 
 	public void start() 

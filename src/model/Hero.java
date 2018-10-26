@@ -5,25 +5,28 @@ public class Hero extends Personnage {
 	private MazeGame jeu;
 	private static int diameter = 10;
 	
-	public Hero(MazeGame jeu) {
+	public Hero(MazeGame jeu, int x, int y) {
 		super();
 		this.jeu = jeu;
-		this.x = 10;
-		this.y = 250;
+		this.x = x;
+		this.y = y;
 	}
 	
 	@Override
 	public void deplacer(int x,int y) {
-		if ((this.x+x>=0) && (this.x+x<=this.jeu.getLimiteX()-diameter) && jeu.getLabyrinthe().open((int)Math.floor((this.x+x)/10),(int)Math.floor((this.y+y)/10))) {
-			this.x += x;
-			System.out.println("X : "+this.x);
+		if ((this.x+x>=0) && (this.x+x<=this.jeu.getLimiteX()-diameter))/* && jeu.getLabyrinthe().open((int)Math.floor((this.x+x)/10),(int)Math.floor((this.y+y)/10)))*/ {
+			if (jeu.getLabyrinthe().open((int)Math.floor((this.x+x)/10),(int)Math.floor((this.y+y)/10))){
+				this.x += x;
+				//System.out.println("X : "+this.x);
+			}
 		}
 
-		if ((this.y+y>=0) && (this.y+y<=this.jeu.getLimiteY()-diameter) && jeu.getLabyrinthe().open((int)Math.floor((this.x+x)/10),(int)Math.floor((this.y+y)/10))) {
-			this.y += y;
-			System.out.println("Y : "+this.y);
+		if ((this.y+y>=0) && (this.y+y<=this.jeu.getLimiteY()-diameter)) /*&& jeu.getLabyrinthe().open((int)Math.floor((this.x+x)/10),(int)Math.floor((this.y+y)/10)))*/ {
+			if (jeu.getLabyrinthe().open((int)Math.floor((this.x+x)/10),(int)Math.floor((this.y+y)/10))) {
+				this.y += y;
+				//System.out.println("Y : "+this.y);				
+			}
 		}
-		
 	}
 	
 
