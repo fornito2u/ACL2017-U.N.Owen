@@ -14,6 +14,9 @@ public class Labyrinthe {
 	}
 	
 	public boolean open(int x, int y) {
+		if(x>=this.murs.length  || y>=this.murs[0].length) {
+			return false;
+		}
 		return !this.murs[x][y];
 	}
 	
