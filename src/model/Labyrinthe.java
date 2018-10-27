@@ -5,13 +5,34 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Random;
 
 public class Labyrinthe {
 
+	//Utilisé par les labyrintes aléatoire
+	private Random deterministicRandom;
+	
 	private boolean[][] murs;
 	private int width;
 	private int height;
-
+	
+	public Labyrinthe(int w, int h, long seed) {
+		this.width=w;
+		this.height=h;
+		this.deterministicRandom=new Random(seed);
+		this.murs = new boolean[this.width][this.height];
+		for(int i=0; i<w; i++) {
+			for(int j=0; j<h; j++) {
+				//Les cotés
+				if ((i == 0) || (j == 0)|| (i == w-1) || (j==h-1)) {
+					this.murs[i][j]=true;
+				} else {
+					//Cette méthode de hasard permet les tests (proba 1/5)
+					this.murs[i][j] = (deterministicRandom.nextInt(5) == 0);
+				}
+			}
+		}
+	}
 	
 	public Labyrinthe(File f) throws IOException {
 		FileReader fr;
@@ -33,7 +54,7 @@ public class Labyrinthe {
 				i++;
 				line =  br.readLine();
 			}
-			System.out.println(murs[2][4]);
+			//System.out.println(murs[2][4]);
 			fr.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

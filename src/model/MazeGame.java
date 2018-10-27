@@ -14,6 +14,9 @@ import model.Hero;
 
 public class MazeGame implements Game {
 	
+	private static int DEFAULT_WIDTH=50;
+	private static int DEFAULT_HEIGHT=25;
+	
 	private Hero hero;
 	private LabyrinthePainter painter;
 	private HeroController controller;
@@ -21,34 +24,27 @@ public class MazeGame implements Game {
 	private int limiteX;
 	private int limiteY;
 	
-	public MazeGame(String source) throws IOException 
-	{
-		this.labyrinthe = new Labyrinthe(new File("labyrinthe.txt"));
+	public MazeGame(String labyrinthFilename) throws IOException {
+		this.labyrinthe = new Labyrinthe(new File(labyrinthFilename));
 		this.hero = new Hero(this);
 		this.controller = new HeroController();
 		this.painter = new LabyrinthePainter(hero, labyrinthe);
 		this.limiteX = painter.getWidth()-20;
 		this.limiteY = painter.getHeight()-30;
-		BufferedReader helpReader;
-		try {
-			helpReader = new BufferedReader(new FileReader(source));
-			String ligne;
-			while ((ligne = helpReader.readLine()) != null) {
-				System.out.println(ligne);
-			}
-			helpReader.close();
-		} catch (IOException e) {
-			//System.out.println("Help not available");
-		}
 	}
-
 	
+	public MazeGame(long seed) {
+		this.labyrinthe = new Labyrinthe(DEFAULT_WIDTH,DEFAULT_HEIGHT,seed);
+		this.hero = new Hero(this);
+		this.controller = new HeroController();
+		this.painter = new LabyrinthePainter(hero, labyrinthe);
+		this.limiteX = painter.getWidth()-20;
+		this.limiteY = painter.getHeight()-30;
+	}
 
 	public Hero getHero() {
 		return hero;
 	}
-
-
 
 	public void start() 
 	{	

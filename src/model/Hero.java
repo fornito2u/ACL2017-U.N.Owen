@@ -38,19 +38,19 @@ public class Hero extends Personnage {
 			return false;
 		}
 		if(this.y+y > this.y && !lab.open((int)Math.floor(destX/10),(int)Math.floor((destY-1)/10+1))) {
-			res = false; 
+			return false;
 		}
 		if(this.x+x > this.x && !lab.open((int)Math.floor((destX-1)/10+1),(int)Math.floor(destY/10))) {
-			res = false; 
+			return false;
 		}
 		if(this.y+y < this.y && !lab.open((int)Math.floor((destX-1)/10+1),(int)Math.floor((destY)/10))) {
-			res = false; 
+			return false;
 		}
 		if(this.x+x < this.x && !lab.open((int)Math.floor((destX)/10),(int)Math.floor((destY-1)/10+1))) {
-			res = false; 
+			return false;
 		}
 		if((this.x+x > this.x ||  this.y+y > this.y) && !lab.open((int)Math.floor((destX-1)/10+1),(int)Math.floor((destY-1)/10+1))) {
-			res = false; 
+			return false;
 		}
 		return true;
 	}
