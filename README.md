@@ -33,6 +33,20 @@ sudo dnf install ant
 
 sudo apt-get install default-jdk
 	
-## Lancement
+## Lancement (et compilation)
 
-ant run
+### ant run
+
+## Lancement avec tests (et compilation)
+
+### ant tests
+
+## Nettoyage
+
+### ant clean
+
+## Notes pour les IDE
+
+Penser à ajouter "lib\junit-platform-console-standalone-1.3.1.jar" au classpath lors de la compilation
+(Sous Eclipse Propetries -> Java Build Path -> Libraries -> Add External JARs...)
+

@@ -6,7 +6,7 @@
   
   <target name="compile" depends="clean">
     <mkdir dir="bin"/>
-    <javac srcdir="src" destdir="bin" encoding="UTF-8"/>
+    <javac classpath="lib/junit-platform-console-standalone-1.3.1.jar" includeantruntime="false" srcdir="src" destdir="bin" encoding="UTF-8"/>
   </target>
   
   <target name="jar" depends="compile">
@@ -20,5 +20,12 @@
   
   <target name="run" depends="jar">
     <java jar="exe/ACL-2018-Projet.jar" fork="true"/>
+  </target>
+  
+  <target name="tests" depends="compile">
+    <java jar="lib/junit-platform-console-standalone-1.3.1.jar" fork="true">
+		<arg line="--class-path bin"/>
+        <arg line="--scan-class-path"/>
+	</java>
   </target>
 </project>
