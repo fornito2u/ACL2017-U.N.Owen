@@ -35,15 +35,15 @@ sudo apt-get install default-jdk
 	
 ## Lancement (et compilation)
 
-### ant run
+ant run
 
 ## Lancement avec tests (et compilation)
 
-### ant tests
+ant tests
 
 ## Nettoyage
 
-### ant clean
+ant clean
 
 ## Notes pour les IDE
 
