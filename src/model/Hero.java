@@ -21,7 +21,6 @@ public class Hero extends Personnage {
 	}
 	
 	public boolean accessible(int x, int y) {
-		boolean res = true;
 		int destX = this.x+x-20;
 		int destY = this.y+y-40;
 		
