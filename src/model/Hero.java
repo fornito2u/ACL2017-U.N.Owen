@@ -8,8 +8,8 @@ public class Hero extends Personnage {
 	public Hero(MazeGame jeu) {
 		super();
 		this.jeu = jeu;
-		this.x = 35;
-		this.y = (this.jeu.getLabyrinthe().getHeight()*10+60)/2;
+		this.x = 20;
+		this.y = (this.jeu.getLabyrinthe().getHeight()*10+70)/2;
 	}
 	
 	@Override

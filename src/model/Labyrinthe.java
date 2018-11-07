@@ -49,7 +49,7 @@ public class Labyrinthe {
 			line =  br.readLine();
 			while(line != null) {
 				for(int j=0; j<line.length(); j++) {
-					this.murs[j][i] = (line.charAt(j) == 'X');
+					this.murs[j][i] = (line.charAt(j) == '█');
 				}
 				i++;
 				line =  br.readLine();
