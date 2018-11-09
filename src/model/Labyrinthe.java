@@ -48,8 +48,10 @@ public class Labyrinthe {
 			this.murs = new boolean[this.width][this.height];
 			line =  br.readLine();
 			while(line != null) {
+				System.out.println("i"+i);
 				for(int j=0; j<line.length(); j++) {
 					this.murs[j][i] = (line.charAt(j) == '█');
+					System.out.println("j"+j);
 				}
 				i++;
 				line =  br.readLine();
