@@ -1,10 +1,6 @@
 package model;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.Random;
 
 public class Labyrinthe {
@@ -35,11 +31,11 @@ public class Labyrinthe {
 	}
 	
 	public Labyrinthe(File f) throws IOException {
-		FileReader fr;
+        InputStreamReader fr;
 		try {
-			fr = new FileReader(f);
+		    //Rajout de l'encodage (sinon bug avec ant sous Windows)
+		    fr = new InputStreamReader(new FileInputStream(f), "UTF-8");
 			BufferedReader br = new BufferedReader (fr);
-			
 			int i=0;
 			String line =  br.readLine();
 			this.width = Integer.parseInt(line);
@@ -48,18 +44,14 @@ public class Labyrinthe {
 			this.murs = new boolean[this.width][this.height];
 			line =  br.readLine();
 			while(line != null) {
-				System.out.println("i"+i);
-				for(int j=0; j<line.length(); j++) {
+				for(int j=0; j<this.width; j++) {
 					this.murs[j][i] = (line.charAt(j) == '█');
-					System.out.println("j"+j);
 				}
 				i++;
 				line =  br.readLine();
 			}
-			//System.out.println(murs[2][4]);
 			fr.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
