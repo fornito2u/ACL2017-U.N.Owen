@@ -109,6 +109,14 @@ public class MazeGame implements Game {
 	public void setLabyrinthe(Labyrinthe labyrinthe) {
 		this.labyrinthe = labyrinthe;
 	}
+	
+	public int getPosX() {
+		return this.labyrinthe.getPosX();
+	}
+	
+	public int getPosY() {
+		return this.labyrinthe.getPosY();
+	}
 
 
 }

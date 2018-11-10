@@ -11,6 +11,8 @@ public class Labyrinthe {
 	private boolean[][] murs;
 	private int width;
 	private int height;
+	private int posX;
+	private int posY;
 	
 	public Labyrinthe(int w, int h, long seed) {
 		this.width=w;
@@ -41,6 +43,10 @@ public class Labyrinthe {
 			this.width = Integer.parseInt(line);
 			line =  br.readLine();
 			this.height = Integer.parseInt(line);
+			line =  br.readLine();
+			this.posX = Integer.parseInt(line);
+			line =  br.readLine();
+			this.posY = Integer.parseInt(line);
 			this.murs = new boolean[this.width][this.height];
 			line =  br.readLine();
 			while(line != null) {
@@ -71,6 +77,15 @@ public class Labyrinthe {
 	public int getHeight() {
 		return this.height;
 	}
+
+	public int getPosX() {
+		return posX;
+	}
+
+	public int getPosY() {
+		return posY;
+	}
+	
 	
 	
 }
