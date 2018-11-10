@@ -2,9 +2,14 @@ package model;
 
 public abstract class Personnage {
 	
+	
+	protected static final int BORDURE_ECRAN=70;
+
+	
 	protected int x;
 	protected int y;
 	protected int pv;
+	
 	
 	public Personnage() {
 		this.pv = 10;

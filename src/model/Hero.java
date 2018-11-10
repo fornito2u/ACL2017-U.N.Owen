@@ -9,7 +9,7 @@ public class Hero extends Personnage {
 		super();
 		this.jeu = jeu;
 		this.x = 20;
-		this.y = (this.jeu.getLabyrinthe().getHeight()*10+70)/2;
+		this.y = (this.jeu.getLabyrinthe().getHeight()*10+BORDURE_ECRAN)/2;
 	}
 	
 	@Override

@@ -3,10 +3,12 @@ package view;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 import engine.GamePainter;
 import model.Hero;
 import model.Labyrinthe;
+import model.Monstre;
 
 /**
  * @author Horatiu Cirstea, Vincent Thomas
@@ -24,11 +26,14 @@ public class LabyrinthePainter implements GamePainter {
 
 	private Hero hero;
 	private Labyrinthe labyrinthe;
+	private ArrayList<Monstre> monstreList;
 	
-	public LabyrinthePainter(Hero hero, Labyrinthe lab)
+	public LabyrinthePainter(Hero hero, Labyrinthe lab,ArrayList<Monstre> monstres)
 	{
 		this.hero = hero;
 		this.labyrinthe = lab;
+		this.monstreList=monstres;
+		
 	}
 
 
@@ -66,6 +71,13 @@ public class LabyrinthePainter implements GamePainter {
 		//Affichage du joueur
 		crayon.setColor(Color.blue);
 		crayon.fillOval(this.hero.getX(),this.hero.getY(),Hero.getDiameter(),Hero.getDiameter());
+		
+		//Affichage des monstres
+		crayon.setColor(Color.red);
+		for(Monstre m : monstreList) {
+			crayon.fillOval(m.getX(),m.getY(),Monstre.getDiameter(),Monstre.getDiameter());
+		}
+		
 		
 		//Affichage de la vie du joueur
 		if(this.hero.getPv()>0)
