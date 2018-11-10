@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import controler.HeroController;
 import engine.GameEngineGraphical;
@@ -14,10 +15,12 @@ import model.Hero;
 
 public class MazeGame implements Game {
 	
-	private static int DEFAULT_WIDTH=50;
-	private static int DEFAULT_HEIGHT=25;
+	private static final int DEFAULT_WIDTH=50;
+	private static final int DEFAULT_HEIGHT=25;
+	private static final int DEFAULT_NB_MONSTRE=40;
 	
 	private Hero hero;
+	private ArrayList<Monstre> monstreList;
 	private LabyrinthePainter painter;
 	private HeroController controller;
 	private Labyrinthe labyrinthe;
@@ -27,8 +30,12 @@ public class MazeGame implements Game {
 	public MazeGame(String labyrinthFilename) throws IOException {
 		this.labyrinthe = new Labyrinthe(new File(labyrinthFilename));
 		this.hero = new Hero(this);
+		this.monstreList=new ArrayList<>();
+		for(int i=0;i<DEFAULT_NB_MONSTRE;i++) {
+			this.monstreList.add(new Monstre(this));
+		}
 		this.controller = new HeroController();
-		this.painter = new LabyrinthePainter(hero, labyrinthe);
+		this.painter = new LabyrinthePainter(hero, labyrinthe,monstreList);
 		this.limiteX = painter.getWidth()-20;
 		this.limiteY = painter.getHeight()-30;
 	}
@@ -36,8 +43,12 @@ public class MazeGame implements Game {
 	public MazeGame(long seed) {
 		this.labyrinthe = new Labyrinthe(DEFAULT_WIDTH,DEFAULT_HEIGHT,seed);
 		this.hero = new Hero(this);
+		this.monstreList=new ArrayList<>();
+		for(int i=0;i<DEFAULT_NB_MONSTRE;i++) {
+			this.monstreList.add(new Monstre(this));
+		}
 		this.controller = new HeroController();
-		this.painter = new LabyrinthePainter(hero, labyrinthe);
+		this.painter = new LabyrinthePainter(hero, labyrinthe,monstreList);
 		this.limiteX = painter.getWidth()-20;
 		this.limiteY = painter.getHeight()-30;
 	}
