@@ -1,5 +1,7 @@
 package model;
 
+import static view.LabyrinthePainter.UNITE_DEPLACEMENT;
+
 public class Hero extends Personnage {
 
 	private MazeGame jeu;
@@ -50,6 +52,20 @@ public class Hero extends Personnage {
 		}
 		if((this.x+x > this.x ||  this.y+y > this.y) && !lab.open((int)Math.floor((destX-1)/10+1),(int)Math.floor((destY-1)/10+1))) {
 			return false;
+		}
+
+		int monstreX ;
+		int monstreY ;
+		for(int i = 0; i < jeu.getMonstreList().size(); ++i)
+		{
+			monstreX = jeu.getMonstreList().get(i).getX();
+			monstreY = jeu.getMonstreList().get(i).getY();
+
+			if(this.x+x >= monstreX-5 && this.x+x <= monstreX+5 &&
+				this.y+y >= monstreY-5 && this.y+y <= monstreY+5)
+			{
+				return false;
+			}
 		}
 		return true;
 	}

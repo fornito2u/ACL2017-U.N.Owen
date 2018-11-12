@@ -17,7 +17,7 @@ public class MazeGame implements Game {
 	
 	private static final int DEFAULT_WIDTH=50;
 	private static final int DEFAULT_HEIGHT=25;
-	private static final int DEFAULT_NB_MONSTRE=40;
+	private static final int DEFAULT_NB_MONSTRE=10;
 	
 	private Hero hero;
 	private ArrayList<Monstre> monstreList;
@@ -129,5 +129,7 @@ public class MazeGame implements Game {
 		return this.labyrinthe.getPosY();
 	}
 
-
+	public ArrayList<Monstre> getMonstreList() {
+		return monstreList;
+	}
 }
