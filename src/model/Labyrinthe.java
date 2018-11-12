@@ -121,12 +121,21 @@ public class Labyrinthe {
 	}
 
 	public int getGoalX() {
-		return goalX;
+		return this.goalX;
 	}
 
 
 	public int getGoalY() {
-		return goalY;
+		return this.goalY;
+	}
+	
+	public void setGoalX(int x) {
+		this.goalX = x;
+	}
+
+
+	public void setGoalY(int y) {
+		this.goalY = y;
 	}
 
 	

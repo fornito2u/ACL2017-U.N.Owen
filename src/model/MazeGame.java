@@ -1,8 +1,6 @@
 package model;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -92,7 +90,10 @@ public class MazeGame implements Game {
 	 */
 	@Override
 	public boolean isFinished() {
-		// le jeu n'est jamais fini
+		if(this.hero.getX() == this.labyrinthe.getGoalX() && this.hero.getY() == this.labyrinthe.getGoalY()) {
+			return true;
+			
+		}
 		return false;
 	}
 

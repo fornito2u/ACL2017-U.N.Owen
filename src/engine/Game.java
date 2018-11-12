@@ -1,5 +1,6 @@
 package engine;
 
+
 /**
  * @author Horatiu Cirstea, Vincent Thomas
  *
@@ -20,5 +21,6 @@ public interface Game {
 	 * @return true si et seulement si le jeu est fini
 	 */
 	public boolean isFinished();
+
 
 }
