@@ -68,6 +68,8 @@ public class LabyrinthePainter implements GamePainter {
 				if(this.labyrinthe.isGoal(i, j)) {
 					crayon.setColor(Color.blue);
 					crayon.fillOval(i*10+20, j*10+40, 10, 10);
+					this.labyrinthe.setGoalX(i*10+20);
+					this.labyrinthe.setGoalY(j*10+40);
 					crayon.setColor(Color.gray);
 				}
 			}
