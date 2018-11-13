@@ -36,6 +36,15 @@ public class Labyrinthe {
 				}
 			}
 		}
+
+		//Position par defaut en haut à gauche
+		this.posX=10+20;
+		this.posY=10+40;
+
+		//Par défaut on considèrera que la case du héros est toujours en haut à gauche
+
+		this.murs[1][1]=0;
+
 	}
 	
 	public Labyrinthe(File f) throws IOException {

@@ -29,9 +29,9 @@ public class TestHero {
 		Hero hero=mg.getHero();
 		int initialX=hero.getX();
 		int initialY=hero.getY();
-		hero.deplacer(0, -10);
+		hero.deplacer(0, 10);
 		assertEquals(initialX, hero.getX());
-		assertEquals(initialY-10, hero.getY());
+		assertEquals(initialY+10, hero.getY());
 	}
 	
 	@Test

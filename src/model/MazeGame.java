@@ -13,9 +13,9 @@ import model.Hero;
 
 public class MazeGame implements Game {
 	
-	private static final int DEFAULT_WIDTH=50;
-	private static final int DEFAULT_HEIGHT=25;
-	private static final int DEFAULT_NB_MONSTRE=10;
+	public static final int DEFAULT_WIDTH=50;
+	public static final int DEFAULT_HEIGHT=25;
+	public static final int DEFAULT_NB_MONSTRE=10;
 	
 	private Hero hero;
 	private ArrayList<Monstre> monstreList;
