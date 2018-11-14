@@ -94,7 +94,6 @@ public class MazeGame implements Game {
 				if(monstreX >= heroX - 10 && monstreX <= heroX + 10 && monstreY >= heroY - 10 && monstreY <= heroY + 10)
 				{
 					this.painter.getHero().attaquer(this.painter.getMonstreList().get(i));
-					System.out.println("PV après attaque : "+this.painter.getMonstreList().get(i).getPv());
 				}
 			}
 
