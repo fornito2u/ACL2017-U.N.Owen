@@ -58,26 +58,29 @@ public class HeroController implements GameController {
 			case KeyEvent.VK_UP:
 			case KeyEvent.VK_Z:
 				this.commandeEnCours = Cmd.UP;
-				isUP=true;
+				isUP = true;
 				break;
 			case KeyEvent.VK_DOWN:
 			case KeyEvent.VK_S:
 				this.commandeEnCours = Cmd.DOWN;
-				isDOWN=true;
+				isDOWN = true;
 				break;
 			case KeyEvent.VK_LEFT:
 			case KeyEvent.VK_Q:
 				this.commandeEnCours = Cmd.LEFT;
-				isLEFT=true;
+				isLEFT = true;
 				break;
 			case KeyEvent.VK_RIGHT:
 			case KeyEvent.VK_D:
 				this.commandeEnCours = Cmd.RIGHT;
-				isRIGHT=true;
+				isRIGHT = true;
+				break;
+			case KeyEvent.VK_SPACE:
+				this.commandeEnCours = Cmd.SPACE;
 				break;
 		}
-
 	}
+
 
 	@Override
 	/**
@@ -116,6 +119,7 @@ public class HeroController implements GameController {
 	 * ne fait rien
 	 */
 	public void keyTyped(KeyEvent e) {
+
 
 	}
 

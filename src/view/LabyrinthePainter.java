@@ -96,6 +96,10 @@ public class LabyrinthePainter implements GamePainter {
 		
 	}
 
+	public ArrayList<Monstre> getMonstreList() {
+		return monstreList;
+	}
+
 	@Override
 	public int getWidth() {
 		return this.labyrinthe.getWidth()*10+40;

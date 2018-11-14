@@ -12,7 +12,7 @@ public abstract class Personnage {
 	
 	
 	public Personnage() {
-		this.pv = 10;
+		this.pv = 20;
 	}
 
 	abstract public void deplacer(int x, int y);

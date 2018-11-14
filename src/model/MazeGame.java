@@ -82,7 +82,26 @@ public class MazeGame implements Game {
 			this.painter.getHero().deplacer(-LabyrinthePainter.UNITE_DEPLACEMENT,0);
 		} else if (commande.equals(Cmd.RIGHT)) {
 			this.painter.getHero().deplacer(LabyrinthePainter.UNITE_DEPLACEMENT,0);
+		} else if (commande.equals(Cmd.SPACE)) {
+			int monstreX ;
+			int monstreY ;
+			int heroX = this.painter.getHero().getX();
+			int heroY = this.painter.getHero().getY();
+
+			for(int i = 0; i < this.painter.getMonstreList().size(); ++i) {
+				monstreX = this.painter.getMonstreList().get(i).getX();
+				monstreY = this.painter.getMonstreList().get(i).getY();
+				if(monstreX >= heroX - 10 && monstreX <= heroX + 10 && monstreY >= heroY - 10 && monstreY <= heroY + 10)
+				{
+					this.painter.getHero().attaquer(this.painter.getMonstreList().get(i));
+					System.out.println("PV après attaque : "+this.painter.getMonstreList().get(i).getPv());
+				}
+			}
+
+
+
 		}
+
 	}
 
 	/**
