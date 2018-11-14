@@ -14,7 +14,7 @@ public class Main {
 		
 		//Labyrinthe particulier et de son afficheur
 		MazeGame jeu = new MazeGame("labyrinthe.txt");
-		
+		//MazeGame jeu = new MazeGame(6);
 		//Labyrinthe au hasard
 		//MazeGame jeu = new MazeGame(System.nanoTime());
 		

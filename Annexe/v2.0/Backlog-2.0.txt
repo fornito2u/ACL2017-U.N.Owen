@@ -1,0 +1,7 @@
+Backlog de la version 2.0 (Sprint 2) :
+- Mise en place de ant (Bellanger Clément)
+- Création de labyrinthe par fichier  (Koch Clément)
+- Résolution du bug de déplacement (Bellanger Clément)
+- Ajout des monstres (Darmois Victor)
+- Ajout du trésor caché (Clément K)
+- Ajout de la collision des monstres avec le héro (Marvin Fornito)

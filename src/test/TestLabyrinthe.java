@@ -1,6 +1,7 @@
 package test;
 
 import model.Labyrinthe;
+import model.MazeGame;
 import org.junit.Test;
 
 import java.io.File;
@@ -12,13 +13,13 @@ public class TestLabyrinthe {
 
     @Test
     public void testOpenRight() throws IOException {
-        Labyrinthe laby=new Labyrinthe(new File("labyrinthe.txt"));
+        Labyrinthe laby=new Labyrinthe(MazeGame.DEFAULT_WIDTH,MazeGame.DEFAULT_HEIGHT,6);
 
         //Case accessible
         assertTrue(laby.open(1,1));
 
         //Case inaccessible
-        assertFalse(laby.open(4,2));
+        assertFalse(laby.open(12,1));
     }
 
     //La bordure est inaccessible
