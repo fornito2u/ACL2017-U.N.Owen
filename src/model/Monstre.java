@@ -5,6 +5,7 @@ import java.util.Random;
 public class Monstre extends Personnage {
 	private MazeGame jeu;
 	private final static int diameter = 10;
+	
 	public Monstre(MazeGame j)
 	{
 		super();
@@ -15,14 +16,14 @@ public class Monstre extends Personnage {
 			newx=r.nextInt(this.jeu.getLabyrinthe().getWidth());
 			newy=r.nextInt(this.jeu.getLabyrinthe().getHeight());
 		}while(!positionPossible(newx,newy));
-		this.x=(newx*10)+20;
-		this.y=(newy*10)+40;
+		this.x=newx;
+		this.y=newy;
 		
 	}
 
+	//Pour cette fonction x et y sont les coordonnées du héro
 	@Override
 	public void deplacer(int x, int y) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -38,7 +39,7 @@ public class Monstre extends Personnage {
 	public boolean positionPossible(int x, int y) {
 		//On teste si la position est possible dans le labyrinthe
 		Labyrinthe lab = this.jeu.getLabyrinthe();
-		if (!lab.open((int)Math.floor(x),(int)Math.floor(y))) {
+		if (!lab.open(x,y)){
 			return false;
 		}
 		//On test la position du hero et un peu autour

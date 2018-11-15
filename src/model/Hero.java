@@ -23,8 +23,8 @@ public class Hero extends Personnage {
 	}
 	
 	public boolean accessible(int x, int y) {
-		int destX = this.x+x-20;
-		int destY = this.y+y-40;
+		int destX = this.x+x;
+		int destY = this.y+y;
 		
 		//On teste les bordures
 		if ((destX<0) || (destX>this.jeu.getLimiteX()-diameter)) {
@@ -32,43 +32,26 @@ public class Hero extends Personnage {
 		} else if ((destY<0) || (destY>this.jeu.getLimiteY()-diameter)) {
 			return false;
 		}
-		
 		//On teste le labyrinthe
 		Labyrinthe lab = this.jeu.getLabyrinthe();
-		if (!lab.open((int)Math.floor(destX/10),(int)Math.floor(destY/10))) {
+		if (!lab.open(destX,destY)) {
 			return false;
 		}
-		if(this.y+y > this.y && !lab.open((int)Math.floor(destX/10),(int)Math.floor((destY-1)/10+1))) {
-			return false;
-		}
-		if(this.x+x > this.x && !lab.open((int)Math.floor((destX-1)/10+1),(int)Math.floor(destY/10))) {
-			return false;
-		}
-		if(this.y+y < this.y && !lab.open((int)Math.floor((destX-1)/10+1),(int)Math.floor((destY)/10))) {
-			return false;
-		}
-		if(this.x+x < this.x && !lab.open((int)Math.floor((destX)/10),(int)Math.floor((destY-1)/10+1))) {
-			return false;
-		}
-		if((this.x+x > this.x ||  this.y+y > this.y) && !lab.open((int)Math.floor((destX-1)/10+1),(int)Math.floor((destY-1)/10+1))) {
-			return false;
+		//Test de colision avec les monstres
+		for(Monstre m : jeu.getMonstreList()) {
+			if(this.x+x >= m.getX() && this.x+x <= m.getX() &&
+					this.y+y >= m.getY() && this.y+y <= m.getY())
+				{
+					return false;
+				}
 		}
 
-		int monstreX ;
-		int monstreY ;
-		for(int i = 0; i < jeu.getMonstreList().size(); ++i)
-		{
-			monstreX = jeu.getMonstreList().get(i).getX();
-			monstreY = jeu.getMonstreList().get(i).getY();
-
-			if(this.x+x >= monstreX-5 && this.x+x <= monstreX+5 &&
-				this.y+y >= monstreY-5 && this.y+y <= monstreY+5)
-			{
-				return false;
-			}
-		}
+			
+		
 		return true;
 	}
+	
+	
 	
 
 	@Override

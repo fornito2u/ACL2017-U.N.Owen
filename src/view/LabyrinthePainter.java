@@ -23,6 +23,9 @@ public class LabyrinthePainter implements GamePainter {
 	 */
 
 	public static final int UNITE_DEPLACEMENT=5;
+	public static final int PROPORTION_ECRAN=10;
+	public static final int DECALAGE_ECRAN_X=20;
+	public static final int DECALAGE_ECRAN_Y=40;
 
 	private Hero hero;
 	private Labyrinthe labyrinthe;
@@ -77,12 +80,12 @@ public class LabyrinthePainter implements GamePainter {
 		
 		//Affichage du joueur
 		crayon.setColor(Color.blue);
-		crayon.fillOval(this.hero.getX(),this.hero.getY(),Hero.getDiameter(),Hero.getDiameter());
+		crayon.fillOval((this.hero.getX()*PROPORTION_ECRAN)+DECALAGE_ECRAN_X,(this.hero.getY()*PROPORTION_ECRAN)+DECALAGE_ECRAN_Y,Hero.getDiameter(),Hero.getDiameter());
 		
 		//Affichage des monstres
 		crayon.setColor(Color.red);
 		for(Monstre m : monstreList) {
-			crayon.fillOval(m.getX(),m.getY(),Monstre.getDiameter(),Monstre.getDiameter());
+			crayon.fillOval((m.getX()*PROPORTION_ECRAN)+DECALAGE_ECRAN_X,(m.getY()*PROPORTION_ECRAN)+DECALAGE_ECRAN_Y,Monstre.getDiameter(),Monstre.getDiameter());
 		}
 		
 		
@@ -96,9 +99,6 @@ public class LabyrinthePainter implements GamePainter {
 		
 	}
 
-	public ArrayList<Monstre> getMonstreList() {
-		return monstreList;
-	}
 
 	@Override
 	public int getWidth() {

@@ -75,32 +75,34 @@ public class MazeGame implements Game {
 	@Override
 	public void evolve(Cmd commande) {
 		if (commande.equals(Cmd.UP)) {
-			this.painter.getHero().deplacer(0, -LabyrinthePainter.UNITE_DEPLACEMENT);
+			this.hero.deplacer(0, -1);
 		} else if (commande.equals(Cmd.DOWN)) {
-			this.painter.getHero().deplacer(0,LabyrinthePainter.UNITE_DEPLACEMENT);
+			this.hero.deplacer(0,1);
 		} else if (commande.equals(Cmd.LEFT)) {
-			this.painter.getHero().deplacer(-LabyrinthePainter.UNITE_DEPLACEMENT,0);
+			this.hero.deplacer(-1,0);
 		} else if (commande.equals(Cmd.RIGHT)) {
-			this.painter.getHero().deplacer(LabyrinthePainter.UNITE_DEPLACEMENT,0);
+			this.hero.deplacer(1,0);
 		} else if (commande.equals(Cmd.SPACE)) {
-			int monstreX ;
-			int monstreY ;
-			int heroX = this.painter.getHero().getX();
-			int heroY = this.painter.getHero().getY();
-
-			for(int i = 0; i < this.painter.getMonstreList().size(); ++i) {
-				monstreX = this.painter.getMonstreList().get(i).getX();
-				monstreY = this.painter.getMonstreList().get(i).getY();
-				if(monstreX >= heroX - 10 && monstreX <= heroX + 10 && monstreY >= heroY - 10 && monstreY <= heroY + 10)
+			for(Monstre m : monstreList) {
+				if(m.getX() >= hero.getX() - 1 && m.getX() <= hero.getX() + 1 && m.getY() >= hero.getY() - 1 && m.getY() <= hero.getY() + 1)
 				{
-					this.painter.getHero().attaquer(this.painter.getMonstreList().get(i));
+					this.hero.attaquer(m);
 				}
 			}
-
-
-
 		}
+		//deplacerMonstre();
 
+	}
+	
+	/**
+	 * Deplacer les monstres
+	 * On donne en parametre les coordonnées du héro pour que les monstres s'en approchent
+	 */
+	
+	public void deplacerMonstre() {
+		for(Monstre m : monstreList) {
+			m.deplacer(hero.getX(), hero.getY());
+		}
 	}
 
 	/**
