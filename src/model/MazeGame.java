@@ -28,6 +28,8 @@ public class MazeGame implements Game {
 	private static int HEROS_ATTACK_COOLDOWN=3; //60ms
 	private static int MONSTER_ATTACK_COOLDOWN=4; //80ms
 
+	private static int NB_FANTOM = 2;
+
 	private boolean herosCanMove;
 	private boolean monsterCanMove;
 	private boolean herosCanAttack;
@@ -51,6 +53,10 @@ public class MazeGame implements Game {
 		this.labyrinthe = new Labyrinthe(new File(labyrinthFilename));
 		this.hero = new Hero(this);
 		this.monstreList=new ArrayList<>();
+		for(int j = 0; j < NB_FANTOM; ++j)
+		{
+			this.monstreList.add(new Fantom(this));
+		}
 		for(int i=0;i<DEFAULT_NB_MONSTRE;i++) {
 			this.monstreList.add(new Monstre(this));
 		}
