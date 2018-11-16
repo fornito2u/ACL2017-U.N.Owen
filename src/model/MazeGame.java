@@ -57,7 +57,7 @@ public class MazeGame implements Game {
 		{
 			this.monstreList.add(new Fantom(this));
 		}
-		for(int i=0;i<DEFAULT_NB_MONSTRE;i++) {
+		for(int i=0;i<DEFAULT_NB_MONSTRE-NB_FANTOM;i++) {
 			this.monstreList.add(new Monstre(this));
 		}
 		this.controller = new HeroController();
