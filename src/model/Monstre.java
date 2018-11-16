@@ -15,7 +15,7 @@ public class Monstre extends Personnage {
 		do {
 			newx=r.nextInt(this.jeu.getLabyrinthe().getWidth());
 			newy=r.nextInt(this.jeu.getLabyrinthe().getHeight());
-		}while(!positionPossible(newx,newy));
+		}while(!positionPossibleApparition(newx,newy));
 		this.x=newx;
 		this.y=newy;
 		
@@ -24,8 +24,19 @@ public class Monstre extends Personnage {
 	//Pour cette fonction x et y sont les coordonnées du héro
 	@Override
 	public void deplacer(int x, int y) {
+		double distance=Math.hypot(this.x-x, this.y-y);
 		
+		if(positionPossibleLabyrinthe(this.x+1, this.y) && Math.hypot((this.x+1-x), this.y-y)<distance){
+			this.x++;
+		}else if(positionPossibleLabyrinthe(this.x-1, this.y) && Math.hypot((this.x-1-x), this.y-y)<distance){
+			this.x--;
+		}else if(positionPossibleLabyrinthe(this.x, this.y+1) && Math.hypot((this.x-x), this.y-y+1)<distance){
+			this.y++;
+		}else if(positionPossibleLabyrinthe(this.x, this.y-1) && Math.hypot((this.x-x), this.y-y-1)<distance){
+			this.y--;
+		}
 	}
+	
 
 	@Override
 	public void attaquer(Personnage p) {
@@ -36,7 +47,7 @@ public class Monstre extends Personnage {
 		return diameter;
 	}
 	
-	public boolean positionPossible(int x, int y) {
+	public boolean positionPossibleApparition(int x, int y) {
 		//On teste si la position est possible dans le labyrinthe
 		Labyrinthe lab = this.jeu.getLabyrinthe();
 		if (!lab.open(x,y)){
@@ -46,14 +57,23 @@ public class Monstre extends Personnage {
 		int[] tabPosition= {0,1,-1,2,-2,3,-3,4,-4,5,-5,6,-6,7,-7};
 		for(int i : tabPosition) {
 			for(int j : tabPosition) {
-				int a=(this.jeu.getHero().getX()/10)+i;
-				int b=(this.jeu.getHero().getY()/10)+j;
+				int a=(this.jeu.getHero().getX())+i;
+				int b=(this.jeu.getHero().getY())+j;
 				if(a==x && b==y) {
 					return false;
 				}
 			}
 		}
 		return true;
+	}
+	
+	public boolean positionPossibleLabyrinthe(int x,int y){
+		Labyrinthe lab = this.jeu.getLabyrinthe();
+		if (!lab.open(x,y)){
+			return false;
+		}
+		return true;
+		
 	}
 	
 }

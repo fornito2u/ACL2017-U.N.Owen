@@ -144,6 +144,7 @@ public class MazeGame implements Game {
 				herosCanAttack=false;
 			}
 		}
+		deplacerMonstre();
 	}
 	
 	/**
