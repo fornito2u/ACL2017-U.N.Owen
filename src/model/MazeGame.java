@@ -9,7 +9,6 @@ import engine.GameEngineGraphical;
 import view.LabyrinthePainter;
 import engine.Cmd;
 import engine.Game;
-import model.Hero;
 
 public class MazeGame implements Game {
 	
@@ -95,15 +94,9 @@ public class MazeGame implements Game {
 		}
 	}
 
-	/**
-	 * faire evoluer le jeu suite a une commande
-	 * 
-	 * @param commande
-	 */
-	@Override
-	public void evolve(Cmd commande) {
-		cycle++;
 
+	private void newCycle() {
+		cycle++;
 		if (cycle%HEROS_MOVE_COOLDOWN == 0) {
 			herosCanMove=true;
 		}
@@ -116,36 +109,55 @@ public class MazeGame implements Game {
 		if (cycle%MONSTER_ATTACK_COOLDOWN == 0) {
 			monsterCanAttack=true;
 		}
+	}
 
+	private void heroTryToMove(int x, int y) {
 		if (herosCanMove) {
-			if (commande.equals(Cmd.UP)) {
-				this.hero.deplacer(0, -1);
-				herosCanMove=false;
-			} else if (commande.equals(Cmd.DOWN)) {
-				this.hero.deplacer(0,1);
-				herosCanMove=false;
-			} else if (commande.equals(Cmd.LEFT)) {
-				this.hero.deplacer(-1,0);
-				herosCanMove=false;
-			} else if (commande.equals(Cmd.RIGHT)) {
-				this.hero.deplacer(1, 0);
-				herosCanMove=false;
-			}
+			this.hero.deplacer(x, y);
+			herosCanMove=false;
 		}
+	}
 
-		if (herosCanAttack) {
-			if (commande.equals(Cmd.SPACE)) {
-				for(Monstre m : monstreList) {
-					if(m.getX() >= hero.getX() - 1 && m.getX() <= hero.getX() + 1 && m.getY() >= hero.getY() - 1 && m.getY() <= hero.getY() + 1)
-					{
-						this.hero.attaquer(m);
-					}
-				}
-				herosCanAttack=false;
-			}
+	private void monstersTryToMove() {
+		if (monsterCanMove) {
+			deplacerMonstre();
+			monsterCanMove=false;
 		}
+	}
+
+	private void heroTryToAttack() {
+		if (herosCanAttack) {
+			for (Monstre m : monstreList) {
+				if (m.getX() >= hero.getX() - 1 && m.getX() <= hero.getX() + 1 && m.getY() >= hero.getY() - 1 && m.getY() <= hero.getY() + 1) {
+					this.hero.attaquer(m);
+				}
+			}
+			herosCanAttack=false;
+		}
+	}
+
+
+	/**
+	 * faire evoluer le jeu suite a une commande
+	 * 
+	 * @param commande
+	 */
+	@Override
+	public void evolve(Cmd commande) {
+		newCycle();
+		if (commande.equals(Cmd.UP)) {
+			heroTryToMove(0,-1);
+		} else if (commande.equals(Cmd.DOWN)) {
+			heroTryToMove(0,1);
+		} else if (commande.equals(Cmd.LEFT)) {
+			heroTryToMove(-1,0);
+		} else if (commande.equals(Cmd.RIGHT)) {
+			heroTryToMove(1,0);
+		} else if (commande.equals(Cmd.SPACE)) {
+			heroTryToAttack();
+		}
+		monstersTryToMove();
 		supprimerMonstre();
-		deplacerMonstre();
 	}
 	
 	/**
