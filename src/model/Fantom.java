@@ -7,18 +7,25 @@ public class Fantom extends Monstre {
         super(j);
     }
 
-    public void deplacer (int x, int y)
-    {
+    public void deplacer(int x, int y) {
         double distance=Math.hypot(this.x-x, this.y-y);
-
-        if(Math.hypot((this.x+1-x), this.y-y)<distance){
+        if(positionPossibleLabyrinthe(this.x+1, this.y) && Math.hypot((this.x+1-x), this.y-y)<distance){
             this.x++;
-        }else if(Math.hypot((this.x-1-x), this.y-y)<distance){
+        }else if(positionPossibleLabyrinthe(this.x-1, this.y) && Math.hypot((this.x-1-x), this.y-y)<distance){
             this.x--;
-        }else if(Math.hypot((this.x-x), this.y-y+1)<distance){
+        }else if(positionPossibleLabyrinthe(this.x, this.y+1) && Math.hypot((this.x-x), this.y-y+1)<distance){
             this.y++;
-        }else if(Math.hypot((this.x-x), this.y-y-1)<distance){
+        }else if(positionPossibleLabyrinthe(this.x, this.y-1) && Math.hypot((this.x-x), this.y-y-1)<distance){
             this.y--;
         }
+    }
+
+    public boolean positionPossibleLabyrinthe(int x,int y){
+        Labyrinthe lab = this.jeu.getLabyrinthe();
+        if(this.jeu.getHero().getX()==x && this.jeu.getHero().getY()==y) {
+            return false;
+        }
+        return true;
+
     }
 }

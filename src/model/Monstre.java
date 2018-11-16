@@ -3,7 +3,8 @@ package model;
 import java.util.Random;
 
 public class Monstre extends Personnage {
-	private MazeGame jeu;
+
+	protected MazeGame jeu;
 	private final static int diameter = 10;
 	
 	public Monstre(MazeGame j)
@@ -20,7 +21,7 @@ public class Monstre extends Personnage {
 		this.y=newy;
 	}
 
-	//Pour cette fonction x et y sont les coordonnées du héro
+	//Pour cette fonction x et y sont les coordonnées du monstres
 	@Override
 	public void deplacer(int x, int y) {
 		double distance=Math.hypot(this.x-x, this.y-y);
