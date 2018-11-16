@@ -10,6 +10,7 @@ import engine.GamePainter;
 import model.Hero;
 import model.Labyrinthe;
 import model.Monstre;
+import model.Personnage;
 
 /**
  * @author Horatiu Cirstea, Vincent Thomas
@@ -90,19 +91,19 @@ public class LabyrinthePainter implements GamePainter {
 		crayon.setColor(Color.red);
 		for(Monstre m : this.game.getMonstreList()) {
 			crayon.fillOval((m.getX()*PROPORTION_ECRAN)+DECALAGE_ECRAN_X,(m.getY()*PROPORTION_ECRAN)+DECALAGE_ECRAN_Y,Monstre.getDiameter(),Monstre.getDiameter());
+			//afficherVie(crayon,m,(m.getX()*PROPORTION_ECRAN)+DECALAGE_ECRAN_X,(m.getY()*PROPORTION_ECRAN)+DECALAGE_ECRAN_Y-10);
 		}
-		
-		
+
 		//Affichage de la vie du joueur
-		if(this.hero.getPv()>0)
-		{
-			crayon.setColor(Color.red);
-			crayon.fillRect(20, 17, this.hero.getPv()*10, 5);
-		}
-		
-		
+		afficherVie(crayon,this.getHero(),20,17);
 	}
 
+	public void afficherVie(Graphics2D crayon, Personnage p, int x, int y) {
+		if (p != null && p.getPv() > 0) {
+			crayon.setColor(Color.red);
+			crayon.fillRect(x, y, p.getPv()*4, 5);
+		}
+	}
 
 	@Override
 	public int getWidth() {

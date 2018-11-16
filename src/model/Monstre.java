@@ -89,16 +89,16 @@ public class Monstre extends Personnage {
 		return true;
 	}
 	
-	public boolean positionPossibleLabyrinthe(int x,int y){
+	public boolean positionPossibleLabyrinthe(int x,int y) {
 		Labyrinthe lab = this.jeu.getLabyrinthe();
-		if (!lab.open(x,y)){
+		if (!lab.open(x, y)) {
 			return false;
 		}
-		if(this.jeu.getHero().getX()==x && this.jeu.getHero().getY()==y) {
+		if (this.jeu.getHero().getX() == x && this.jeu.getHero().getY() == y) {
 			return false;
 		}
 		return true;
-		
+
 	}
 	
 }

@@ -213,7 +213,6 @@ public class MazeGame implements Game {
 		return labyrinthe;
 	}
 
-
 	public void setLabyrinthe(Labyrinthe labyrinthe) {
 		this.labyrinthe = labyrinthe;
 	}
@@ -226,8 +225,6 @@ public class MazeGame implements Game {
 		return this.labyrinthe.getPosY();
 	}
 
-
-	
 	public void changeLevel() {
 		this.setLevel(this.level + 1);
 		this.hero.reInit();
