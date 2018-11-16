@@ -26,8 +26,8 @@ public class MazeGame implements Game {
 	private int limiteY;
 	private int level;
 	
-	public MazeGame(String labyrinthFilename) throws IOException {
-		this.labyrinthe = new Labyrinthe(new File(labyrinthFilename));
+	public MazeGame() throws IOException {
+		this.labyrinthe = new Labyrinthe();
 		this.hero = new Hero(this);
 		this.monstreList=new ArrayList<>();
 		for(int i=0;i<DEFAULT_NB_MONSTRE;i++) {
@@ -164,11 +164,7 @@ public class MazeGame implements Game {
 		this.setLevel(this.level + 1);
 		this.hero.reInit();
 		this.monstreReinit();
-		this.tresorReinit();
-	}
-
-	private void tresorReinit() {
-		this.labyrinthe.tresorReinit();
+		this.labyrinthe.reInit(this.level);
 	}
 
 	private void monstreReinit() {

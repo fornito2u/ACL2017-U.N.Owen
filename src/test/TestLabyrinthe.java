@@ -25,7 +25,7 @@ public class TestLabyrinthe {
     //La bordure est inaccessible
     @Test
     public void testOpenBoundary() throws IOException {
-        Labyrinthe laby=new Labyrinthe(new File("labyrinthe.txt"));
+        Labyrinthe laby=new Labyrinthe();
         int w=laby.getWidth();
         int h=laby.getHeight();
 

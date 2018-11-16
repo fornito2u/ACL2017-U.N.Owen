@@ -13,7 +13,7 @@ public class Main {
 	public static void main(String[] args) throws InterruptedException, IOException {
 		
 		//Labyrinthe particulier et de son afficheur
-		MazeGame jeu = new MazeGame("labyrinthe.txt");
+		MazeGame jeu = new MazeGame();
 		//MazeGame jeu = new MazeGame(6);
 		//Labyrinthe au hasard
 		//MazeGame jeu = new MazeGame(System.nanoTime());
