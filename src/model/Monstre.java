@@ -3,7 +3,8 @@ package model;
 import java.util.Random;
 
 public class Monstre extends Personnage {
-	private MazeGame jeu;
+
+	protected MazeGame jeu;
 	private final static int diameter = 10;
 	
 	public Monstre(MazeGame j)
@@ -15,17 +16,49 @@ public class Monstre extends Personnage {
 		do {
 			newx=r.nextInt(this.jeu.getLabyrinthe().getWidth());
 			newy=r.nextInt(this.jeu.getLabyrinthe().getHeight());
-		}while(!positionPossible(newx,newy));
+		}while(!positionPossibleApparition(newx,newy));
 		this.x=newx;
 		this.y=newy;
-		
 	}
 
-	//Pour cette fonction x et y sont les coordonnées du héro
+	//Pour cette fonction x et y sont les coordonnées du monstres
 	@Override
 	public void deplacer(int x, int y) {
+		double distance=Math.hypot(this.x-x, this.y-y);
+		if(positionPossibleLabyrinthe(this.x+1, this.y) && Math.hypot((this.x+1-x), this.y-y)<distance){
+			this.x++;
+		}else if(positionPossibleLabyrinthe(this.x-1, this.y) && Math.hypot((this.x-1-x), this.y-y)<distance){
+			this.x--;
+		}else if(positionPossibleLabyrinthe(this.x, this.y+1) && Math.hypot((this.x-x), this.y-y+1)<distance){
+			this.y++;
+		}else if(positionPossibleLabyrinthe(this.x, this.y-1) && Math.hypot((this.x-x), this.y-y-1)<distance){
+			this.y--;
+		}
+	}
+	
+	public boolean explore(int x,int y){
+		boolean[][] visite=new boolean[jeu.getLabyrinthe().getHeight()][jeu.getLabyrinthe().getWidth()];
+		double distance=Math.hypot(this.x-x, this.y-y);
+		if(x==jeu.getHero().getX() && y==jeu.getHero().getY()){
+			return true;
+		}
+		if(positionPossibleLabyrinthe(this.x+1, this.y) && Math.hypot((this.x+1-x), this.y-y)<distance && visite[this.x+1][this.y]){
+			visite[this.x+1][this.y]=true;
+			return explore(this.x+1,this.y);
+		}else if(positionPossibleLabyrinthe(this.x-1, this.y) && Math.hypot((this.x-1-x), this.y-y)<distance && !visite[this.x-1][this.y]){
+			visite[this.x-1][this.y]=true;
+			return explore(this.x-1,this.y);
+		}else if(positionPossibleLabyrinthe(this.x, this.y+1) && Math.hypot((this.x-x), this.y-y+1)<distance && !visite[this.x][this.y+1]){
+			visite[this.x][this.y+1]=true;
+			return explore(this.x,this.y+1);
+		}else if(positionPossibleLabyrinthe(this.x, this.y-1) && Math.hypot((this.x-x), this.y-y-1)<distance && !visite[this.x][this.y-1]){
+			visite[this.x][this.y-1]=true;
+			return explore(this.x,this.y-1);
+		}
+		return false;
 		
 	}
+	
 
 	@Override
 	public void attaquer(Personnage p) {
@@ -36,7 +69,7 @@ public class Monstre extends Personnage {
 		return diameter;
 	}
 	
-	public boolean positionPossible(int x, int y) {
+	public boolean positionPossibleApparition(int x, int y) {
 		//On teste si la position est possible dans le labyrinthe
 		Labyrinthe lab = this.jeu.getLabyrinthe();
 		if (!lab.open(x,y)){
@@ -46,14 +79,26 @@ public class Monstre extends Personnage {
 		int[] tabPosition= {0,1,-1,2,-2,3,-3,4,-4,5,-5,6,-6,7,-7};
 		for(int i : tabPosition) {
 			for(int j : tabPosition) {
-				int a=(this.jeu.getHero().getX()/10)+i;
-				int b=(this.jeu.getHero().getY()/10)+j;
+				int a=(this.jeu.getHero().getX())+i;
+				int b=(this.jeu.getHero().getY())+j;
 				if(a==x && b==y) {
 					return false;
 				}
 			}
 		}
 		return true;
+	}
+	
+	public boolean positionPossibleLabyrinthe(int x,int y) {
+		Labyrinthe lab = this.jeu.getLabyrinthe();
+		if (!lab.open(x, y)) {
+			return false;
+		}
+		if (this.jeu.getHero().getX() == x && this.jeu.getHero().getY() == y) {
+			return false;
+		}
+		return true;
+
 	}
 	
 }

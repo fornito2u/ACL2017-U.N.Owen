@@ -9,14 +9,31 @@ import engine.GameEngineGraphical;
 import view.LabyrinthePainter;
 import engine.Cmd;
 import engine.Game;
-import model.Hero;
 
 public class MazeGame implements Game {
 	
 	public static final int DEFAULT_WIDTH=50;
 	public static final int DEFAULT_HEIGHT=25;
 	public static final int DEFAULT_NB_MONSTRE=10;
-	
+
+
+	//Gestion des cooldowns grâce aux cycles
+	//Un cycle est égal à 20ms (voir GameEngineGraphical - run() - Thread.sleep)
+	private int cycle;
+
+	//Le cooldown en nombre de cycles
+	private static int HEROS_MOVE_COOLDOWN=3; // 60ms
+	private static int MONSTER_MOVE_COOLDOWN=4; //80ms
+	private static int HEROS_ATTACK_COOLDOWN=3; //60ms
+	private static int MONSTER_ATTACK_COOLDOWN=4; //80ms
+
+	private static int NB_FANTOM = 2;
+
+	private boolean herosCanMove;
+	private boolean monsterCanMove;
+	private boolean herosCanAttack;
+	private boolean monsterCanAttack;
+
 	private Hero hero;
 	private ArrayList<Monstre> monstreList;
 	private LabyrinthePainter painter;
@@ -27,10 +44,19 @@ public class MazeGame implements Game {
 	private int level;
 	
 	public MazeGame() throws IOException {
+		this.cycle=0;
+		this.herosCanMove=true;
+		this.monsterCanMove=true;
+		this.herosCanAttack=true;
+		this.monsterCanAttack=true;
 		this.labyrinthe = new Labyrinthe();
 		this.hero = new Hero(this);
 		this.monstreList=new ArrayList<>();
-		for(int i=0;i<DEFAULT_NB_MONSTRE;i++) {
+		for(int j = 0; j < NB_FANTOM; ++j)
+		{
+			this.monstreList.add(new Fantom(this));
+		}
+		for(int i=0;i<DEFAULT_NB_MONSTRE-NB_FANTOM;i++) {
 			this.monstreList.add(new Monstre(this));
 		}
 		this.controller = new HeroController();
@@ -41,6 +67,11 @@ public class MazeGame implements Game {
 	}
 	
 	public MazeGame(long seed) {
+		this.cycle=0;
+		this.herosCanMove=true;
+		this.monsterCanMove=true;
+		this.herosCanAttack=true;
+		this.monsterCanAttack=true;
 		this.labyrinthe = new Labyrinthe(DEFAULT_WIDTH,DEFAULT_HEIGHT,seed);
 		this.hero = new Hero(this);
 		this.monstreList=new ArrayList<>();
@@ -69,6 +100,49 @@ public class MazeGame implements Game {
 		}
 	}
 
+
+	private void newCycle() {
+		cycle++;
+		if (cycle%HEROS_MOVE_COOLDOWN == 0) {
+			herosCanMove=true;
+		}
+		if (cycle%MONSTER_MOVE_COOLDOWN == 0) {
+			monsterCanMove=true;
+		}
+		if (cycle%HEROS_ATTACK_COOLDOWN == 0) {
+			herosCanAttack=true;
+		}
+		if (cycle%MONSTER_ATTACK_COOLDOWN == 0) {
+			monsterCanAttack=true;
+		}
+	}
+
+	private void heroTryToMove(int x, int y) {
+		if (herosCanMove) {
+			this.hero.deplacer(x, y);
+			herosCanMove=false;
+		}
+	}
+
+	private void monstersTryToMove() {
+		if (monsterCanMove) {
+			deplacerMonstre();
+			monsterCanMove=false;
+		}
+	}
+
+	private void heroTryToAttack() {
+		if (herosCanAttack) {
+			for (Monstre m : monstreList) {
+				if (m.getX() >= hero.getX() - 1 && m.getX() <= hero.getX() + 1 && m.getY() >= hero.getY() - 1 && m.getY() <= hero.getY() + 1) {
+					this.hero.attaquer(m);
+				}
+			}
+			herosCanAttack=false;
+		}
+	}
+
+
 	/**
 	 * faire evoluer le jeu suite a une commande
 	 * 
@@ -76,24 +150,20 @@ public class MazeGame implements Game {
 	 */
 	@Override
 	public void evolve(Cmd commande) {
+		newCycle();
 		if (commande.equals(Cmd.UP)) {
-			this.hero.deplacer(0, -1);
+			heroTryToMove(0,-1);
 		} else if (commande.equals(Cmd.DOWN)) {
-			this.hero.deplacer(0,1);
+			heroTryToMove(0,1);
 		} else if (commande.equals(Cmd.LEFT)) {
-			this.hero.deplacer(-1,0);
+			heroTryToMove(-1,0);
 		} else if (commande.equals(Cmd.RIGHT)) {
-			this.hero.deplacer(1,0);
+			heroTryToMove(1,0);
 		} else if (commande.equals(Cmd.SPACE)) {
-			for(Monstre m : monstreList) {
-				if(m.getX() >= hero.getX() - 1 && m.getX() <= hero.getX() + 1 && m.getY() >= hero.getY() - 1 && m.getY() <= hero.getY() + 1)
-				{
-					this.hero.attaquer(m);
-				}
-			}
+			heroTryToAttack();
 		}
-		//deplacerMonstre();
-
+		monstersTryToMove();
+		supprimerMonstre();
 	}
 	
 	/**
@@ -143,7 +213,6 @@ public class MazeGame implements Game {
 		return labyrinthe;
 	}
 
-
 	public void setLabyrinthe(Labyrinthe labyrinthe) {
 		this.labyrinthe = labyrinthe;
 	}
@@ -156,10 +225,6 @@ public class MazeGame implements Game {
 		return this.labyrinthe.getPosY();
 	}
 
-	public ArrayList<Monstre> getMonstreList() {
-		return monstreList;
-	}
-	
 	public void changeLevel() {
 		this.setLevel(this.level + 1);
 		this.hero.reInit();
@@ -182,7 +247,17 @@ public class MazeGame implements Game {
 		this.level = level;
 	}
 
-	public ArrayList<Monstre> getMontreList() {
-		return this.monstreList;
+	
+	public ArrayList<Monstre> getMonstreList() {
+		return monstreList;
 	}
+
+	public void supprimerMonstre() {
+		for(int i=0;i<monstreList.size();i++){
+			if(monstreList.get(i).getPv()<=0){
+				monstreList.remove(i);
+			}
+		}
+	}
+	
 }

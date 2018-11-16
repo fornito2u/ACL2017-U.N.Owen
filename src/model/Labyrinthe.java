@@ -40,8 +40,8 @@ public class Labyrinthe {
 		}
 
 		//Position par defaut en haut à gauche
-		this.posX=10+20;
-		this.posY=10+40;
+		this.posX=1;
+		this.posY=1;
 
 		//Par défaut on considèrera que la case du héros est toujours en haut à gauche
 

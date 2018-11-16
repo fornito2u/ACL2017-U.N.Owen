@@ -28,6 +28,6 @@ public interface Game {
 
 	public int getLevel();
 
-	public ArrayList<Monstre> getMontreList();
+	public ArrayList<Monstre> getMonstreList();
 
 }
