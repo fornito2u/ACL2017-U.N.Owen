@@ -27,6 +27,8 @@ public class MazeGame implements Game {
 	private static int HEROS_ATTACK_COOLDOWN=3; //60ms
 	private static int MONSTER_ATTACK_COOLDOWN=4; //80ms
 
+	private static int NB_FANTOM = 2;
+
 	private boolean herosCanMove;
 	private boolean monsterCanMove;
 	private boolean herosCanAttack;
@@ -50,7 +52,11 @@ public class MazeGame implements Game {
 		this.labyrinthe = new Labyrinthe(new File(labyrinthFilename));
 		this.hero = new Hero(this);
 		this.monstreList=new ArrayList<>();
-		for(int i=0;i<DEFAULT_NB_MONSTRE;i++) {
+		for(int j = 0; j < NB_FANTOM; ++j)
+		{
+			this.monstreList.add(new Fantom(this));
+		}
+		for(int i=0;i<DEFAULT_NB_MONSTRE-NB_FANTOM;i++) {
 			this.monstreList.add(new Monstre(this));
 		}
 		this.controller = new HeroController();
@@ -220,9 +226,7 @@ public class MazeGame implements Game {
 		return this.labyrinthe.getPosY();
 	}
 
-	public ArrayList<Monstre> getMonstreList() {
-		return monstreList;
-	}
+
 	
 	public void changeLevel() {
 		this.setLevel(this.level + 1);
@@ -250,8 +254,9 @@ public class MazeGame implements Game {
 		this.level = level;
 	}
 
-	public ArrayList<Monstre> getMontreList() {
-		return this.monstreList;
+	
+	public ArrayList<Monstre> getMonstreList() {
+		return monstreList;
 	}
 
 	public void supprimerMonstre() {
@@ -261,4 +266,5 @@ public class MazeGame implements Game {
 			}
 		}
 	}
+	
 }

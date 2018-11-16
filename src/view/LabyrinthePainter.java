@@ -88,7 +88,7 @@ public class LabyrinthePainter implements GamePainter {
 		
 		//Affichage des monstres
 		crayon.setColor(Color.red);
-		for(Monstre m : this.game.getMontreList()) {
+		for(Monstre m : this.game.getMonstreList()) {
 			crayon.fillOval((m.getX()*PROPORTION_ECRAN)+DECALAGE_ECRAN_X,(m.getY()*PROPORTION_ECRAN)+DECALAGE_ECRAN_Y,Monstre.getDiameter(),Monstre.getDiameter());
 		}
 		
