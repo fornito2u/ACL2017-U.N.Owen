@@ -36,6 +36,29 @@ public class Monstre extends Personnage {
 		}
 	}
 	
+	public boolean explore(int x,int y){
+		boolean[][] visite=new boolean[jeu.getLabyrinthe().getHeight()][jeu.getLabyrinthe().getWidth()];
+		double distance=Math.hypot(this.x-x, this.y-y);
+		if(x==jeu.getHero().getX() && y==jeu.getHero().getY()){
+			return true;
+		}
+		if(positionPossibleLabyrinthe(this.x+1, this.y) && Math.hypot((this.x+1-x), this.y-y)<distance && visite[this.x+1][this.y]){
+			visite[this.x+1][this.y]=true;
+			return explore(this.x+1,this.y);
+		}else if(positionPossibleLabyrinthe(this.x-1, this.y) && Math.hypot((this.x-1-x), this.y-y)<distance && !visite[this.x-1][this.y]){
+			visite[this.x-1][this.y]=true;
+			return explore(this.x-1,this.y);
+		}else if(positionPossibleLabyrinthe(this.x, this.y+1) && Math.hypot((this.x-x), this.y-y+1)<distance && !visite[this.x][this.y+1]){
+			visite[this.x][this.y+1]=true;
+			return explore(this.x,this.y+1);
+		}else if(positionPossibleLabyrinthe(this.x, this.y-1) && Math.hypot((this.x-x), this.y-y-1)<distance && !visite[this.x][this.y-1]){
+			visite[this.x][this.y-1]=true;
+			return explore(this.x,this.y-1);
+		}
+		return false;
+		
+	}
+	
 
 	@Override
 	public void attaquer(Personnage p) {
