@@ -1,5 +1,8 @@
 package engine;
 
+import java.util.ArrayList;
+
+import model.Monstre;
 
 /**
  * @author Horatiu Cirstea, Vincent Thomas
@@ -24,5 +27,7 @@ public interface Game {
 	public boolean isFinished() throws InterruptedException;
 
 	public int getLevel();
+
+	public ArrayList<Monstre> getMontreList();
 
 }

@@ -146,4 +146,23 @@ public class Labyrinthe {
 	public void setGoalY(int y) {
 		this.goalY = y;
 	}
+
+	public void tresorReinit() {
+		Random r = new Random();
+		int x = r.nextInt(this.width);
+		int y = r.nextInt(this.height);
+		boolean changePos = true;
+		while(changePos) {
+			if(this.murs[x][y] == 1) {
+				x = r.nextInt(this.width);
+				y = r.nextInt(this.height);
+			} else {
+				this.murs[this.goalX/10][this.goalY/10] = 0;
+				this.murs[x][y] = 2;
+				this.goalX = x;
+				this.goalY = y;
+				changePos = false;
+			}
+		}
+	}
 }

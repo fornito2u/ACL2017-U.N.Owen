@@ -30,15 +30,13 @@ public class LabyrinthePainter implements GamePainter {
 
 	private Hero hero;
 	private Labyrinthe labyrinthe;
-	private ArrayList<Monstre> monstreList;
 	private Game game;
 	
-	public LabyrinthePainter(Hero hero, Labyrinthe lab,ArrayList<Monstre> monstres, Game game)
+	public LabyrinthePainter(Hero hero, Labyrinthe lab, Game game)
 	{
 		this.game = game;
 		this.hero = hero;
 		this.labyrinthe = lab;
-		this.monstreList=monstres;
 		
 	}
 
@@ -90,7 +88,7 @@ public class LabyrinthePainter implements GamePainter {
 		
 		//Affichage des monstres
 		crayon.setColor(Color.red);
-		for(Monstre m : monstreList) {
+		for(Monstre m : this.game.getMontreList()) {
 			crayon.fillOval((m.getX()*PROPORTION_ECRAN)+DECALAGE_ECRAN_X,(m.getY()*PROPORTION_ECRAN)+DECALAGE_ECRAN_Y,Monstre.getDiameter(),Monstre.getDiameter());
 		}
 		

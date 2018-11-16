@@ -34,7 +34,7 @@ public class MazeGame implements Game {
 			this.monstreList.add(new Monstre(this));
 		}
 		this.controller = new HeroController();
-		this.painter = new LabyrinthePainter(hero, labyrinthe,monstreList, this);
+		this.painter = new LabyrinthePainter(hero, labyrinthe, this);
 		this.limiteX = painter.getWidth()-20;
 		this.limiteY = painter.getHeight()-30;
 		this.setLevel(1);
@@ -48,7 +48,7 @@ public class MazeGame implements Game {
 			this.monstreList.add(new Monstre(this));
 		}
 		this.controller = new HeroController();
-		this.painter = new LabyrinthePainter(hero, labyrinthe,monstreList, this);
+		this.painter = new LabyrinthePainter(hero, labyrinthe, this);
 		this.limiteX = painter.getWidth()-20;
 		this.limiteY = painter.getHeight()-30;
 	}
@@ -163,6 +163,19 @@ public class MazeGame implements Game {
 	public void changeLevel() {
 		this.setLevel(this.level + 1);
 		this.hero.reInit();
+		this.monstreReinit();
+		this.tresorReinit();
+	}
+
+	private void tresorReinit() {
+		this.labyrinthe.tresorReinit();
+	}
+
+	private void monstreReinit() {
+		this.monstreList=new ArrayList<>();
+		for(int i=0;i<DEFAULT_NB_MONSTRE;i++) {
+			this.monstreList.add(new Monstre(this));
+		}
 	}
 
 	public int getLevel() {
@@ -171,5 +184,9 @@ public class MazeGame implements Game {
 
 	public void setLevel(int level) {
 		this.level = level;
+	}
+
+	public ArrayList<Monstre> getMontreList() {
+		return this.monstreList;
 	}
 }
