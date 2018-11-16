@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import engine.Game;
 import engine.GamePainter;
 import model.Hero;
 import model.Labyrinthe;
@@ -30,9 +31,11 @@ public class LabyrinthePainter implements GamePainter {
 	private Hero hero;
 	private Labyrinthe labyrinthe;
 	private ArrayList<Monstre> monstreList;
+	private Game game;
 	
-	public LabyrinthePainter(Hero hero, Labyrinthe lab,ArrayList<Monstre> monstres)
+	public LabyrinthePainter(Hero hero, Labyrinthe lab,ArrayList<Monstre> monstres, Game game)
 	{
+		this.game = game;
 		this.hero = hero;
 		this.labyrinthe = lab;
 		this.monstreList=monstres;
@@ -71,12 +74,15 @@ public class LabyrinthePainter implements GamePainter {
 				if(this.labyrinthe.isGoal(i, j)) {
 					crayon.setColor(Color.orange);
 					crayon.fillRect(i*10+22, j*10+42, 6, 6);
-					this.labyrinthe.setGoalX(i*10+20);
-					this.labyrinthe.setGoalY(j*10+40);
+					this.labyrinthe.setGoalX(i*10);
+					this.labyrinthe.setGoalY(j*10);
 					crayon.setColor(Color.gray);
 				}
 			}
 		}
+		
+		//Affichage du niveau
+		crayon.drawString("Niveau "+Integer.toString(this.game.getLevel()), this.getWidth()-100, 25);
 		
 		//Affichage du joueur
 		crayon.setColor(Color.blue);

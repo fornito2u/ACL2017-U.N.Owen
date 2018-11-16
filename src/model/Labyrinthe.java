@@ -146,8 +146,4 @@ public class Labyrinthe {
 	public void setGoalY(int y) {
 		this.goalY = y;
 	}
-
-	
-	
-	
 }

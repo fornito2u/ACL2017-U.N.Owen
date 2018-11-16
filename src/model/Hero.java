@@ -62,6 +62,11 @@ public class Hero extends Personnage {
 	public static int getDiameter() {
 		return diameter ;
 	}
+
+	public void reInit() {
+		this.x = this.jeu.getPosX();
+		this.y = this.jeu.getPosY();
+	}
 	
 	
 

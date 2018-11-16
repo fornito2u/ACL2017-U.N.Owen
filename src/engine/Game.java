@@ -19,8 +19,10 @@ public interface Game {
 
 	/**
 	 * @return true si et seulement si le jeu est fini
+	 * @throws InterruptedException 
 	 */
-	public boolean isFinished();
+	public boolean isFinished() throws InterruptedException;
 
+	public int getLevel();
 
 }

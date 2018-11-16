@@ -24,6 +24,7 @@ public class MazeGame implements Game {
 	private Labyrinthe labyrinthe;
 	private int limiteX;
 	private int limiteY;
+	private int level;
 	
 	public MazeGame(String labyrinthFilename) throws IOException {
 		this.labyrinthe = new Labyrinthe(new File(labyrinthFilename));
@@ -33,9 +34,10 @@ public class MazeGame implements Game {
 			this.monstreList.add(new Monstre(this));
 		}
 		this.controller = new HeroController();
-		this.painter = new LabyrinthePainter(hero, labyrinthe,monstreList);
+		this.painter = new LabyrinthePainter(hero, labyrinthe,monstreList, this);
 		this.limiteX = painter.getWidth()-20;
 		this.limiteY = painter.getHeight()-30;
+		this.setLevel(1);
 	}
 	
 	public MazeGame(long seed) {
@@ -46,7 +48,7 @@ public class MazeGame implements Game {
 			this.monstreList.add(new Monstre(this));
 		}
 		this.controller = new HeroController();
-		this.painter = new LabyrinthePainter(hero, labyrinthe,monstreList);
+		this.painter = new LabyrinthePainter(hero, labyrinthe,monstreList, this);
 		this.limiteX = painter.getWidth()-20;
 		this.limiteY = painter.getHeight()-30;
 	}
@@ -105,13 +107,17 @@ public class MazeGame implements Game {
 		}
 	}
 
+
 	/**
 	 * verifier si le jeu est fini
+	 * @throws InterruptedException 
 	 */
 	@Override
-	public boolean isFinished() {
-		if(this.hero.getX() == this.labyrinthe.getGoalX() && this.hero.getY() == this.labyrinthe.getGoalY()) {
-			return true;
+	public boolean isFinished() throws InterruptedException {
+		if(this.hero.getX()*10 == this.labyrinthe.getGoalX() && this.hero.getY()*10 == this.labyrinthe.getGoalY()) {
+			this.changeLevel();
+			Thread.sleep(1000);
+			return false;
 			
 		}
 		return false;
@@ -152,5 +158,18 @@ public class MazeGame implements Game {
 
 	public ArrayList<Monstre> getMonstreList() {
 		return monstreList;
+	}
+	
+	public void changeLevel() {
+		this.setLevel(this.level + 1);
+		this.hero.reInit();
+	}
+
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
 	}
 }
