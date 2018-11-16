@@ -18,7 +18,6 @@ public class Monstre extends Personnage {
 		}while(!positionPossibleApparition(newx,newy));
 		this.x=newx;
 		this.y=newy;
-		
 	}
 
 	//Pour cette fonction x et y sont les coordonnées du héro
@@ -72,8 +71,15 @@ public class Monstre extends Personnage {
 		if (!lab.open(x,y)){
 			return false;
 		}
+		if(this.jeu.getHero().getX()==x && this.jeu.getHero().getY()==y) {
+			return false;
+		}
 		return true;
 		
+	}
+	@Override
+	public int getPv(){
+		return this.pv;
 	}
 	
 }

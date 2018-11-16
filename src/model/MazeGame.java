@@ -144,6 +144,7 @@ public class MazeGame implements Game {
 				herosCanAttack=false;
 			}
 		}
+		supprimerMonstre();
 		deplacerMonstre();
 	}
 	
@@ -239,5 +240,13 @@ public class MazeGame implements Game {
 
 	public ArrayList<Monstre> getMontreList() {
 		return this.monstreList;
+	}
+
+	public void supprimerMonstre() {
+		for(int i=0;i<monstreList.size();i++){
+			if(monstreList.get(i).getPv()<=0){
+				monstreList.remove(i);
+			}
+		}
 	}
 }
