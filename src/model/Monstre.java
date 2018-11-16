@@ -24,7 +24,6 @@ public class Monstre extends Personnage {
 	@Override
 	public void deplacer(int x, int y) {
 		double distance=Math.hypot(this.x-x, this.y-y);
-		
 		if(positionPossibleLabyrinthe(this.x+1, this.y) && Math.hypot((this.x+1-x), this.y-y)<distance){
 			this.x++;
 		}else if(positionPossibleLabyrinthe(this.x-1, this.y) && Math.hypot((this.x-1-x), this.y-y)<distance){
@@ -76,10 +75,6 @@ public class Monstre extends Personnage {
 		}
 		return true;
 		
-	}
-	@Override
-	public int getPv(){
-		return this.pv;
 	}
 	
 }

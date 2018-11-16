@@ -125,7 +125,7 @@ public class MazeGame implements Game {
 
 		if (herosCanMove) {
 			if (commande.equals(Cmd.UP)) {
-				this.hero.deplacer(0, -1);
+				this.hero.deplacer(0,-1);
 				herosCanMove=false;
 			} else if (commande.equals(Cmd.DOWN)) {
 				this.hero.deplacer(0,1);
@@ -134,7 +134,7 @@ public class MazeGame implements Game {
 				this.hero.deplacer(-1,0);
 				herosCanMove=false;
 			} else if (commande.equals(Cmd.RIGHT)) {
-				this.hero.deplacer(1, 0);
+				this.hero.deplacer(1,0);
 				herosCanMove=false;
 			}
 		}
@@ -214,9 +214,7 @@ public class MazeGame implements Game {
 		return this.labyrinthe.getPosY();
 	}
 
-	public ArrayList<Monstre> getMonstreList() {
-		return monstreList;
-	}
+
 	
 	public void changeLevel() {
 		this.setLevel(this.level + 1);
@@ -244,8 +242,9 @@ public class MazeGame implements Game {
 		this.level = level;
 	}
 
-	public ArrayList<Monstre> getMontreList() {
-		return this.monstreList;
+	
+	public ArrayList<Monstre> getMonstreList() {
+		return monstreList;
 	}
 
 	public void supprimerMonstre() {
@@ -255,4 +254,5 @@ public class MazeGame implements Game {
 			}
 		}
 	}
+	
 }
