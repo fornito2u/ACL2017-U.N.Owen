@@ -139,7 +139,9 @@ public class Labyrinthe {
 		while(continuer) {
 			boolean accessible = false;
 			boolean back = false;
+			int compteur = 0;
 			while(!accessible) {
+				compteur++;
 				switch(temp) {
 					case 0:
 						if(x<width/3-1 && !parcouru.contains(new Point(x+1, y))) {
@@ -207,6 +209,10 @@ public class Labyrinthe {
 						break;
 				}
 				
+			}
+			if(compteur == 4) {
+				back = true;
+				compteur = 0;
 			}
 			if(!back) {
 				parcouru.add(0,new Point(x,y));
