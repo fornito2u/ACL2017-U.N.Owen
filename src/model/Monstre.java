@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Monstre extends Personnage {
@@ -90,15 +91,42 @@ public class Monstre extends Personnage {
 	}
 	
 	public boolean positionPossibleLabyrinthe(int x,int y) {
+		if (!collisionMur(x,y) && !collisionHero(x,y) && !collisionMonstres(x,y)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean collisionMur(int x, int y) {
 		Labyrinthe lab = this.jeu.getLabyrinthe();
 		if (!lab.open(x, y)) {
+			return true;
+		} else {
 			return false;
 		}
-		if (this.jeu.getHero().getX() == x && this.jeu.getHero().getY() == y) {
-			return false;
-		}
-		return true;
+	}
 
+	public boolean collisionHero(int x, int y) {
+		Hero hero=this.jeu.getHero();
+		if (hero.getX() == x && hero.getY() == y) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean collisionMonstres(int x, int y) {
+		ArrayList<Monstre> list_monstres=this.jeu.getMonstreList();
+		for (int i=0;i<list_monstres.size();i++) {
+			Monstre m=list_monstres.get(i);
+			if (m != this) {
+				if (m.getX() == x && m.getY() == y) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 	
 }

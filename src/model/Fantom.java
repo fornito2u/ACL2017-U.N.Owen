@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Fantom extends Monstre {
 
     public Fantom(MazeGame j)
@@ -20,12 +22,11 @@ public class Fantom extends Monstre {
         }
     }
 
-    public boolean positionPossibleLabyrinthe(int x,int y){
-        Labyrinthe lab = this.jeu.getLabyrinthe();
-        if(this.jeu.getHero().getX()==x && this.jeu.getHero().getY()==y) {
+    public boolean positionPossibleLabyrinthe(int x,int y) {
+        if (!collisionHero(x,y) && !collisionMonstres(x,y)) {
+            return true;
+        } else {
             return false;
         }
-        return true;
-
     }
 }
