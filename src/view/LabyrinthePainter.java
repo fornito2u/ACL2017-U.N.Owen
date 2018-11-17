@@ -90,10 +90,16 @@ public class LabyrinthePainter implements GamePainter {
 		//Affichage des monstres
 		crayon.setColor(Color.red);
 		for(Monstre m : this.game.getMonstreList()) {
+			if (m.isFantom()) {
+				crayon.setColor(Color.black);
+			} else {
+				crayon.setColor(Color.red);
+			}
 			crayon.fillOval((m.getX()*PROPORTION_ECRAN)+DECALAGE_ECRAN_X,(m.getY()*PROPORTION_ECRAN)+DECALAGE_ECRAN_Y,Monstre.getDiameter(),Monstre.getDiameter());
 			//afficherVie(crayon,m,(m.getX()*PROPORTION_ECRAN)+DECALAGE_ECRAN_X,(m.getY()*PROPORTION_ECRAN)+DECALAGE_ECRAN_Y-10);
 		}
 
+		crayon.setColor(Color.red);
 		//Affichage de la vie du joueur
 		afficherVie(crayon,this.getHero(),20,17);
 	}

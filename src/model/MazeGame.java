@@ -23,16 +23,19 @@ public class MazeGame implements Game {
 
 	//Le cooldown en nombre de cycles
 	private static int HEROS_MOVE_COOLDOWN=3; // 60ms
-	private static int MONSTER_MOVE_COOLDOWN=4; //80ms
+	private static int MONSTER_MOVE_COOLDOWN=8; //160ms
+	private static int FANTOM_MOVE_COOLDOWN=10; //200ms
 	private static int HEROS_ATTACK_COOLDOWN=3; //60ms
-	private static int MONSTER_ATTACK_COOLDOWN=4; //80ms
-
+	private static int MONSTER_ATTACK_COOLDOWN=8; //160ms
+	private static int FANTOM_ATTACK_COOLDOWN=10; //200ms
 	private static int NB_FANTOM = 2;
 
 	private boolean herosCanMove;
 	private boolean monsterCanMove;
+	private boolean fantomCanMove;
 	private boolean herosCanAttack;
 	private boolean monsterCanAttack;
+	private boolean fantomCanAttack;
 
 	private Hero hero;
 	private ArrayList<Monstre> monstreList;
@@ -52,8 +55,7 @@ public class MazeGame implements Game {
 		this.labyrinthe = new Labyrinthe();
 		this.hero = new Hero(this);
 		this.monstreList=new ArrayList<>();
-		for(int j = 0; j < NB_FANTOM; ++j)
-		{
+		for(int j = 0; j < NB_FANTOM; ++j) {
 			this.monstreList.add(new Fantom(this));
 		}
 		for(int i=0;i<DEFAULT_NB_MONSTRE-NB_FANTOM;i++) {
@@ -75,7 +77,10 @@ public class MazeGame implements Game {
 		this.labyrinthe = new Labyrinthe(DEFAULT_WIDTH,DEFAULT_HEIGHT,seed);
 		this.hero = new Hero(this);
 		this.monstreList=new ArrayList<>();
-		for(int i=0;i<DEFAULT_NB_MONSTRE;i++) {
+		for(int j = 0; j < NB_FANTOM; ++j) {
+			this.monstreList.add(new Fantom(this));
+		}
+		for(int i=0;i<DEFAULT_NB_MONSTRE-NB_FANTOM;i++) {
 			this.monstreList.add(new Monstre(this));
 		}
 		this.controller = new HeroController();
@@ -109,11 +114,17 @@ public class MazeGame implements Game {
 		if (cycle%MONSTER_MOVE_COOLDOWN == 0) {
 			monsterCanMove=true;
 		}
+		if (cycle%FANTOM_MOVE_COOLDOWN == 0) {
+			fantomCanMove=true;
+		}
 		if (cycle%HEROS_ATTACK_COOLDOWN == 0) {
 			herosCanAttack=true;
 		}
 		if (cycle%MONSTER_ATTACK_COOLDOWN == 0) {
 			monsterCanAttack=true;
+		}
+		if (cycle%FANTOM_ATTACK_COOLDOWN == 0) {
+			fantomCanAttack=true;
 		}
 	}
 
@@ -129,7 +140,12 @@ public class MazeGame implements Game {
 			deplacerMonstre();
 			monsterCanMove=false;
 		}
+		if (fantomCanMove) {
+			deplacerFantom();
+			fantomCanMove=false;
+		}
 	}
+
 
 	private void heroTryToAttack() {
 		if (herosCanAttack) {
@@ -173,7 +189,16 @@ public class MazeGame implements Game {
 	
 	public void deplacerMonstre() {
 		for(Monstre m : monstreList) {
-			m.deplacer(hero.getX(), hero.getY());
+			if (!m.isFantom()) {
+				m.deplacer(hero.getX(), hero.getY());
+			}
+		}
+	}
+	public void deplacerFantom() {
+		for(Monstre m : monstreList) {
+			if (m.isFantom()) {
+				m.deplacer(hero.getX(), hero.getY());
+			}
 		}
 	}
 
@@ -234,7 +259,10 @@ public class MazeGame implements Game {
 
 	private void monstreReinit() {
 		this.monstreList=new ArrayList<>();
-		for(int i=0;i<DEFAULT_NB_MONSTRE;i++) {
+		for(int j = 0; j < NB_FANTOM; ++j) {
+			this.monstreList.add(new Fantom(this));
+		}
+		for(int i=0;i<DEFAULT_NB_MONSTRE-NB_FANTOM;i++) {
 			this.monstreList.add(new Monstre(this));
 		}
 	}

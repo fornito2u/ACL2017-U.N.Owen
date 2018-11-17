@@ -29,4 +29,8 @@ public class Fantom extends Monstre {
             return false;
         }
     }
+
+    public boolean isFantom() {
+        return true;
+    }
 }

@@ -89,6 +89,10 @@ public class Monstre extends Personnage {
 		}
 		return true;
 	}
+
+	public boolean isFantom() {
+		return false;
+	}
 	
 	public boolean positionPossibleLabyrinthe(int x,int y) {
 		if (!collisionMur(x,y) && !collisionHero(x,y) && !collisionMonstres(x,y)) {
