@@ -133,15 +133,14 @@ public class Labyrinthe {
 		}
 		boolean continuer = true;
 		ArrayList<Point> parcouru = new ArrayList<Point>();
-		int x=0,y=0,temp=0,boucle=0;
+		int x=0,y=0,temp=0,boucle=0, compteur =0;
 		int index = 0;
 		parcouru.add(0,new Point(0,0));
 		while(continuer) {
 			boolean accessible = false;
 			boolean back = false;
-			int compteur = 0;
+			compteur++; 
 			while(!accessible) {
-				compteur++;
 				switch(temp) {
 					case 0:
 						if(x<width/3-1 && !parcouru.contains(new Point(x+1, y))) {
@@ -210,7 +209,7 @@ public class Labyrinthe {
 				}
 				
 			}
-			if(compteur == 4) {
+			if(compteur == 6) {
 				back = true;
 				compteur = 0;
 			}
@@ -218,10 +217,15 @@ public class Labyrinthe {
 				parcouru.add(0,new Point(x,y));
 				index = 0;
 			} else {
-				index++;
+				if(parcouru.size()> index+7) {
+					index+=6;
+				} else {
+					index++;
+				}
 				if(x==0 && y==0) {
 					continuer = false;
 				}
+				back = false;
 			}
 			temp = rand.nextInt(4);
 			boucle = temp;
@@ -229,8 +233,6 @@ public class Labyrinthe {
 		
 		if(x==0 && y==0) {
 			continuer=false;
-		} else {
-			System.out.println(x+" "+y);
 		}
 				
 		//Création du writer
