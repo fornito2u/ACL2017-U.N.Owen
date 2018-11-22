@@ -17,6 +17,8 @@ public class Labyrinthe {
 	private int posY;
 	private int goalX;
 	private int goalY;
+	private int vortexX;
+	private int vortexY;
 	
 	public Labyrinthe(int w, int h, long seed) {
 		this.width=w;
@@ -57,7 +59,11 @@ public class Labyrinthe {
 		if(x>=this.murs.length  || y>=this.murs[0].length || x<0 || y<0) {
 			return false;
 		}
-		return (this.murs[x][y]==0 || this.murs[x][y]==2);
+		return (this.murs[x][y]==0 || this.murs[x][y]==2 || this.murs[x][y]==3);
+	}
+	
+	public boolean vortex(int x, int y) {
+		return (this.murs[x][y]==3);
 	}
 
 	public int getWidth() {
@@ -105,7 +111,7 @@ public class Labyrinthe {
 		file.createNewFile();
 		
 		//Création des variables
-		int width = 42+1;
+		int width = 30+1;
 		boolean[][] parcours = new boolean[width/3][width/3];
 		boolean[][] labyrinthe = new boolean[width][width];
 		Random rand = new Random(seed);
@@ -299,9 +305,14 @@ public class Labyrinthe {
 			line =  br.readLine();
 			this.height = Integer.parseInt(line);
 			line =  br.readLine();
+			//Position aléatoire du trésor
 			this.goalX = r.nextInt(this.width);
 			this.goalY = r.nextInt(this.height);
 			boolean goal = false;
+			//Position aléatoire d'un vortex
+			this.vortexX = r.nextInt(this.width);
+			this.vortexY = r.nextInt(this.height);
+			boolean vortex = false;
 			this.posX = Integer.parseInt(line);
 			line =  br.readLine();
 			this.posY = Integer.parseInt(line);
@@ -324,10 +335,26 @@ public class Labyrinthe {
 							goal = false;
 						}
 					} else {
-						if(line.charAt(j) == 'X') {
-							this.murs[j][i]=1;
+						if(j == vortexX && i == vortexY || vortex) {
+							if(line.charAt(j) == 'X') {
+								vortex = true;
+								if(line.charAt(j) == 'X') {
+									this.murs[j][i]=1;
+								} else {
+									this.murs[j][i]=0;
+								}
+							} else {
+								this.murs[j][i] = 3;
+								this.vortexX = j;
+								this.vortexY = i;
+								vortex = false;
+							}
 						} else {
-							this.murs[j][i]=0;
+							if(line.charAt(j) == 'X') {
+								this.murs[j][i]=1;
+							} else {
+								this.murs[j][i]=0;
+							}
 						}
 					}
 				}
@@ -339,5 +366,27 @@ public class Labyrinthe {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public boolean isVortex(int x, int y) {
+		return (this.murs[x][y] == 3);
+	}
+
+	public int getVortexX() {
+		return this.vortexX;
+	}
+
+
+	public int getVortexY() {
+		return this.vortexY;
+	}
+	
+	public void setVortexX(int x) {
+		this.vortexX = x;
+	}
+
+
+	public void setVortexY(int y) {
+		this.vortexY = y;
 	}
 }

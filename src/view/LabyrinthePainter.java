@@ -35,6 +35,7 @@ public class LabyrinthePainter implements GamePainter {
 	private Hero hero;
 	private Labyrinthe labyrinthe;
 	private Game game;
+	private int compteurVortex = 0;
 	
 	public LabyrinthePainter(Hero hero, Labyrinthe lab, Game game)
 	{
@@ -70,6 +71,7 @@ public class LabyrinthePainter implements GamePainter {
 		Image mur= new ImageIcon("images/mur.png").getImage();
 		Image sol= new ImageIcon("images/sol.png").getImage();
 		Image tresor= new ImageIcon("images/tresor.png").getImage();
+		Image vortex= new ImageIcon("images/vortex.png").getImage();
 		for(int i=0; i<(this.getWidth()-40)/20; i++) {
 			for(int j=0; j<(this.getHeight()-60)/20; j++) {
 				if(!this.labyrinthe.open(i, j)) {
@@ -81,6 +83,23 @@ public class LabyrinthePainter implements GamePainter {
 					this.labyrinthe.setGoalX(i*20);
 					this.labyrinthe.setGoalY(j*20);
 					crayon.drawImage(tresor, i*20+22, j*20+42, null);
+				}
+				if(this.labyrinthe.isVortex(i, j)) {
+					this.labyrinthe.setVortexX(i*20);
+					this.labyrinthe.setVortexY(j*20);
+					crayon.drawImage(vortex, 
+							i*20+22, 
+							j*20+42,
+							i*20+22+20, 
+							j*20+42+20,
+							compteurVortex/10*30,0,
+							compteurVortex/10*30+30,30,
+							null);
+					if(compteurVortex == 140) {
+						compteurVortex=0;
+					} else {
+						compteurVortex++;
+					}
 				}
 			}
 		}
@@ -102,8 +121,8 @@ public class LabyrinthePainter implements GamePainter {
 		//Affichage des monstres
 		Image monstre= new ImageIcon("images/monstre.png").getImage();
 		Image fantom= new ImageIcon("images/fantom.png").getImage();
-		for(Monstre m : this.game.getMonstreList()) {
-			
+		
+		for(Monstre m : this.game.getMonstreList()) {	
 			//afficherVie(crayon,m,(m.getX()*PROPORTION_ECRAN)+DECALAGE_ECRAN_X,(m.getY()*PROPORTION_ECRAN)+DECALAGE_ECRAN_Y-10);
 			if (m.isFantom()) {
 				crayon.drawImage(fantom, 

@@ -14,7 +14,7 @@ public class MazeGame implements Game {
 	
 	public static final int DEFAULT_WIDTH=50;
 	public static final int DEFAULT_HEIGHT=25;
-	public static final int DEFAULT_NB_MONSTRE=10;
+	public static final int DEFAULT_NB_MONSTRE=0;
 
 
 	//Gestion des cooldowns grâce aux cycles
@@ -28,7 +28,7 @@ public class MazeGame implements Game {
 	private static int HEROS_ATTACK_COOLDOWN=3; //60ms
 	private static int MONSTER_ATTACK_COOLDOWN=8; //160ms
 	private static int FANTOM_ATTACK_COOLDOWN=10; //200ms
-	private static int NB_FANTOM = 2;
+	private static int NB_FANTOM = 0;
 
 	private boolean herosCanMove;
 	private boolean monsterCanMove;
