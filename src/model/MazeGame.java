@@ -209,7 +209,7 @@ public class MazeGame implements Game {
 	 */
 	@Override
 	public boolean isFinished() throws InterruptedException {
-		if(this.hero.getX()*10 == this.labyrinthe.getGoalX() && this.hero.getY()*10 == this.labyrinthe.getGoalY()) {
+		if(this.hero.getX()*20 == this.labyrinthe.getGoalX() && this.hero.getY()*20 == this.labyrinthe.getGoalY()) {
 			this.changeLevel();
 			Thread.sleep(1000);
 			return false;

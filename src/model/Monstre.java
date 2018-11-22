@@ -6,7 +6,9 @@ import java.util.Random;
 public class Monstre extends Personnage {
 
 	protected MazeGame jeu;
-	private final static int diameter = 10;
+	private final static int diameter = 20;
+	private int direction = 1;
+	private int compteur = 0;
 	
 	public Monstre(MazeGame j)
 	{
@@ -28,12 +30,21 @@ public class Monstre extends Personnage {
 		double distance=Math.hypot(this.x-x, this.y-y);
 		if(positionPossibleLabyrinthe(this.x+1, this.y) && Math.hypot((this.x+1-x), this.y-y)<distance){
 			this.x++;
+			this.direction = 3;
 		}else if(positionPossibleLabyrinthe(this.x-1, this.y) && Math.hypot((this.x-1-x), this.y-y)<distance){
 			this.x--;
+			this.direction = 1;
 		}else if(positionPossibleLabyrinthe(this.x, this.y+1) && Math.hypot((this.x-x), this.y-y+1)<distance){
 			this.y++;
+			this.direction = 2;
 		}else if(positionPossibleLabyrinthe(this.x, this.y-1) && Math.hypot((this.x-x), this.y-y-1)<distance){
 			this.y--;
+			this.direction = 0;
+		}
+		if(compteur == 8) {
+			compteur = 0;
+		} else {
+			compteur++;
 		}
 	}
 	
@@ -131,6 +142,14 @@ public class Monstre extends Personnage {
 			}
 		}
 		return false;
+	}
+	
+	public int getDirection() {
+		return this.direction;
+	}
+	
+	public int getCompteur() {
+		return compteur;
 	}
 	
 }

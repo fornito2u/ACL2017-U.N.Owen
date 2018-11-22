@@ -2,8 +2,10 @@ package view;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
+
+import javax.swing.ImageIcon;
 
 import engine.Game;
 import engine.GamePainter;
@@ -20,12 +22,13 @@ import model.Personnage;
  */
 public class LabyrinthePainter implements GamePainter {
 
+
 	/**
 	 * la taille des cases
 	 */
 
-	public static final int UNITE_DEPLACEMENT=5;
-	public static final int PROPORTION_ECRAN=10;
+	public static final int UNITE_DEPLACEMENT=3;
+	public static final int PROPORTION_ECRAN=20;
 	public static final int DECALAGE_ECRAN_X=20;
 	public static final int DECALAGE_ECRAN_Y=40;
 
@@ -64,44 +67,70 @@ public class LabyrinthePainter implements GamePainter {
 	public void draw(BufferedImage im) {
 		Graphics2D crayon = (Graphics2D) im.getGraphics();
 		//Affichage du labyrinthe
-		crayon.setColor(Color.gray);
-		for(int i=0; i<(this.getWidth()-40)/10; i++) {
-			for(int j=0; j<(this.getHeight()-60)/10; j++) {
+		Image mur= new ImageIcon("images/mur.png").getImage();
+		Image sol= new ImageIcon("images/sol.png").getImage();
+		Image tresor= new ImageIcon("images/tresor.png").getImage();
+		for(int i=0; i<(this.getWidth()-40)/20; i++) {
+			for(int j=0; j<(this.getHeight()-60)/20; j++) {
 				if(!this.labyrinthe.open(i, j)) {
-					crayon.fillRect(i*10+20, j*10+40, 10, 10);
+					crayon.drawImage(mur, i*20+20, j*20+40, null);
+				} else {
+					crayon.drawImage(sol, i*20+20, j*20+40, null);
 				}
 				if(this.labyrinthe.isGoal(i, j)) {
-					crayon.setColor(Color.orange);
-					crayon.fillRect(i*10+22, j*10+42, 6, 6);
-					this.labyrinthe.setGoalX(i*10);
-					this.labyrinthe.setGoalY(j*10);
-					crayon.setColor(Color.gray);
+					this.labyrinthe.setGoalX(i*20);
+					this.labyrinthe.setGoalY(j*20);
+					crayon.drawImage(tresor, i*20+22, j*20+42, null);
 				}
 			}
 		}
 		
 		//Affichage du niveau
+		crayon.setColor(Color.gray);
 		crayon.drawString("Niveau "+Integer.toString(this.game.getLevel()), this.getWidth()-100, 25);
 		
 		//Affichage du joueur
-		crayon.setColor(Color.blue);
-		crayon.fillOval((this.hero.getX()*PROPORTION_ECRAN)+DECALAGE_ECRAN_X,(this.hero.getY()*PROPORTION_ECRAN)+DECALAGE_ECRAN_Y,Hero.getDiameter(),Hero.getDiameter());
-		
+		Image hero= new ImageIcon("images/hero.png").getImage();
+		crayon.drawImage(hero, 
+				(this.hero.getX()*PROPORTION_ECRAN)+DECALAGE_ECRAN_X,
+				(this.hero.getY()*PROPORTION_ECRAN)+DECALAGE_ECRAN_Y-10,
+				(this.hero.getX()*PROPORTION_ECRAN)+DECALAGE_ECRAN_X+30,
+				(this.hero.getY()*PROPORTION_ECRAN)+DECALAGE_ECRAN_Y+20,
+				this.hero.getCompteur()*30,this.hero.getDirection()*30,
+				this.hero.getCompteur()*30+30,this.hero.getDirection()*30+30,
+				null);
 		//Affichage des monstres
-		crayon.setColor(Color.red);
+		Image monstre= new ImageIcon("images/monstre.png").getImage();
+		Image fantom= new ImageIcon("images/fantom.png").getImage();
 		for(Monstre m : this.game.getMonstreList()) {
-			if (m.isFantom()) {
-				crayon.setColor(Color.black);
-			} else {
-				crayon.setColor(Color.red);
-			}
-			crayon.fillOval((m.getX()*PROPORTION_ECRAN)+DECALAGE_ECRAN_X,(m.getY()*PROPORTION_ECRAN)+DECALAGE_ECRAN_Y,Monstre.getDiameter(),Monstre.getDiameter());
+			
 			//afficherVie(crayon,m,(m.getX()*PROPORTION_ECRAN)+DECALAGE_ECRAN_X,(m.getY()*PROPORTION_ECRAN)+DECALAGE_ECRAN_Y-10);
+			if (m.isFantom()) {
+				crayon.drawImage(fantom, 
+						(m.getX()*PROPORTION_ECRAN)+DECALAGE_ECRAN_X,
+						(m.getY()*PROPORTION_ECRAN)+DECALAGE_ECRAN_Y-10,
+						(m.getX()*PROPORTION_ECRAN)+DECALAGE_ECRAN_X+30,
+						(m.getY()*PROPORTION_ECRAN)+DECALAGE_ECRAN_Y+20,
+						m.getCompteur()*30,m.getDirection()*30,
+						m.getCompteur()*30+30,m.getDirection()*30+30,
+						null);
+			} else {
+				crayon.drawImage(monstre, 
+						(m.getX()*PROPORTION_ECRAN)+DECALAGE_ECRAN_X,
+						(m.getY()*PROPORTION_ECRAN)+DECALAGE_ECRAN_Y-10,
+						(m.getX()*PROPORTION_ECRAN)+DECALAGE_ECRAN_X+30,
+						(m.getY()*PROPORTION_ECRAN)+DECALAGE_ECRAN_Y+20,
+						m.getCompteur()*30,m.getDirection()*30,
+						m.getCompteur()*30+30,m.getDirection()*30+30,
+						null);
+			}
 		}
 
 		crayon.setColor(Color.red);
 		//Affichage de la vie du joueur
 		afficherVie(crayon,this.getHero(),20,17);
+		
+		
 	}
 
 	public void afficherVie(Graphics2D crayon, Personnage p, int x, int y) {
@@ -113,11 +142,11 @@ public class LabyrinthePainter implements GamePainter {
 
 	@Override
 	public int getWidth() {
-		return this.labyrinthe.getWidth()*10+40;
+		return this.labyrinthe.getWidth()*20+40;
 	}
 
 	@Override
 	public int getHeight() {
-		return this.labyrinthe.getHeight()*10+60;
+		return this.labyrinthe.getHeight()*20+60;
 	}
 }

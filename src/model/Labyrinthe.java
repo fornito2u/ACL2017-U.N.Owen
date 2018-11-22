@@ -105,7 +105,7 @@ public class Labyrinthe {
 		file.createNewFile();
 		
 		//Création des variables
-		int width = 60+1;
+		int width = 42+1;
 		boolean[][] parcours = new boolean[width/3][width/3];
 		boolean[][] labyrinthe = new boolean[width][width];
 		Random rand = new Random(seed);
@@ -229,10 +229,6 @@ public class Labyrinthe {
 			}
 			temp = rand.nextInt(4);
 			boucle = temp;
-		}
-		
-		if(x==0 && y==0) {
-			continuer=false;
 		}
 				
 		//Création du writer
