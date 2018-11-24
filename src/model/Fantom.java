@@ -1,11 +1,11 @@
 package model;
 
-import java.util.ArrayList;
 
 public class Fantom extends Monstre {
 
 	private int direction = 1;
 	private int compteur = 0;
+	private int points = 30;
 	
     public Fantom(MazeGame j)
     {

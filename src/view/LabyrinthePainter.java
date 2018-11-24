@@ -108,6 +108,10 @@ public class LabyrinthePainter implements GamePainter {
 		crayon.setColor(Color.gray);
 		crayon.drawString("Niveau "+Integer.toString(this.game.getLevel()), this.getWidth()-100, 25);
 		
+		//Affichage des points
+		crayon.setColor(Color.gray);
+		crayon.drawString(Integer.toString(this.hero.getPoints())+" points", this.getWidth()/2, 25);
+		
 		//Affichage du joueur
 		Image hero= new ImageIcon("images/hero.png").getImage();
 		crayon.drawImage(hero, 

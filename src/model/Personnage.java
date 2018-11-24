@@ -43,5 +43,7 @@ public abstract class Personnage {
 
 	abstract public void attaquer(Personnage p);
 
+	protected abstract int getPoints();
+
 	
 }

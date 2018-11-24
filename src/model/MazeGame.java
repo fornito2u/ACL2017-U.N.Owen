@@ -23,12 +23,12 @@ public class MazeGame implements Game {
 
 	//Le cooldown en nombre de cycles
 	private static int HEROS_MOVE_COOLDOWN=3; // 60ms
-	private static int MONSTER_MOVE_COOLDOWN=8; //160ms
-	private static int FANTOM_MOVE_COOLDOWN=10; //200ms
+	private static int MONSTER_MOVE_COOLDOWN=17; //160ms
+	private static int FANTOM_MOVE_COOLDOWN=15; //200ms
 	private static int HEROS_ATTACK_COOLDOWN=3; //60ms
 	private static int MONSTER_ATTACK_COOLDOWN=8; //160ms
 	private static int FANTOM_ATTACK_COOLDOWN=10; //200ms
-	private static int NB_FANTOM = 0;
+	private static int NB_FANTOM = 3;
 
 	private boolean herosCanMove;
 	private boolean monsterCanMove;
@@ -211,6 +211,7 @@ public class MazeGame implements Game {
 	public boolean isFinished() throws InterruptedException {
 		if(this.hero.getX()*20 == this.labyrinthe.getGoalX() && this.hero.getY()*20 == this.labyrinthe.getGoalY()) {
 			this.changeLevel();
+			this.hero.increasePoints(this.level*50);
 			Thread.sleep(1000);
 			return false;
 			

@@ -10,6 +10,7 @@ public class Monstre extends Personnage {
 	private int direction = 1;
 	private int compteur = 0;
 	private static int DISTANCE_DETECTION=7;
+	private int points = 10;
 	
 	public Monstre(MazeGame j)
 	{
@@ -146,6 +147,11 @@ public class Monstre extends Personnage {
 	
 	public int getCompteur() {
 		return compteur;
+	}
+
+	@Override
+	protected int getPoints() {
+		return this.points;
 	}
 	
 }

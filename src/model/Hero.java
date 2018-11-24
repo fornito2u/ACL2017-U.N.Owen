@@ -8,6 +8,7 @@ public class Hero extends Personnage {
 	private static int diameter = 20;
 	private int direction = 1;
 	private int compteur = 0;
+	private int points = 0;
 	
 	
 	public Hero(MazeGame jeu) {
@@ -19,7 +20,6 @@ public class Hero extends Personnage {
 	
 	@Override
 	public void deplacer(int x,int y) {
-		//System.out.println(x+" "+y);
 		if(this.accessible(x, y)) {
 			this.x += x;
 			this.y += y;
@@ -61,7 +61,6 @@ public class Hero extends Personnage {
 		}
 		if (lab.vortex(destX,destY)) {
 			this.deplacer(this.jeu.getLabyrinthe().getHeight()-2-this.x, this.jeu.getLabyrinthe().getHeight()-2-this.y);
-			//System.out.println((this.jeu.getLabyrinthe().getHeight()-2-this.x));
 			return false;
 		}
 		//Test de colision avec les monstres
@@ -84,6 +83,7 @@ public class Hero extends Personnage {
 	@Override
 	public void attaquer(Personnage p) {
 		p.setPv(p.getPv()-1);
+		this.points+=p.getPoints();
 	}
 
 	public static int getDiameter() {
@@ -101,6 +101,14 @@ public class Hero extends Personnage {
 	
 	public int getCompteur() {
 		return compteur;
+	}
+
+	public void increasePoints(int i) {	
+		this.points+=i;		
+	}
+
+	public int getPoints() {
+		return this.points;
 	}
 
 }
