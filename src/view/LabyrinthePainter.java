@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -158,6 +159,15 @@ public class LabyrinthePainter implements GamePainter {
 		if (p != null && p.getPv() > 0) {
 			crayon.setColor(Color.red);
 			crayon.fillRect(x, y, p.getPv()*4, 5);
+		}
+		if(p.getPv() <= 0) {
+			//Affichage du game over
+			crayon.setColor(Color.white);
+			crayon.fillRect(this.getWidth()/2-45, this.getHeight()/2-33, 135, 30);
+			crayon.setColor(Color.black);
+			Font font = new Font("Arial", Font.PLAIN, 20);
+			crayon.setFont(font);
+			crayon.drawString("GAME OVER", this.getWidth()/2-40, this.getHeight()/2-10);
 		}
 	}
 

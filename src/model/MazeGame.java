@@ -228,6 +228,9 @@ public class MazeGame implements Game {
 			return false;
 			
 		}
+		if(this.hero.getPv() <= 0) {
+			return true;
+		}
 		return false;
 	}
 
