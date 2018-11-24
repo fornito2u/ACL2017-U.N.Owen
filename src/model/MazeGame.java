@@ -14,7 +14,7 @@ public class MazeGame implements Game {
 	
 	public static final int DEFAULT_WIDTH=50;
 	public static final int DEFAULT_HEIGHT=25;
-	public static final int DEFAULT_NB_MONSTRE=0;
+	public static final int DEFAULT_NB_MONSTRE=10;
 
 
 	//Gestion des cooldowns grâce aux cycles

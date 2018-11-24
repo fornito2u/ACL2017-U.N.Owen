@@ -9,6 +9,7 @@ public class Monstre extends Personnage {
 	private final static int diameter = 20;
 	private int direction = 1;
 	private int compteur = 0;
+	private static int DISTANCE_DETECTION=7;
 	
 	public Monstre(MazeGame j)
 	{
@@ -24,23 +25,42 @@ public class Monstre extends Personnage {
 		this.y=newy;
 	}
 
-	//Pour cette fonction x et y sont les coordonnées du monstres
+	//Pour cette fonction x et y sont les coordonnées du hero
 	@Override
 	public void deplacer(int x, int y) {
 		double distance=Math.hypot(this.x-x, this.y-y);
-		if(positionPossibleLabyrinthe(this.x+1, this.y) && Math.hypot((this.x+1-x), this.y-y)<distance){
-			this.x++;
-			this.direction = 3;
-		}else if(positionPossibleLabyrinthe(this.x-1, this.y) && Math.hypot((this.x-1-x), this.y-y)<distance){
-			this.x--;
-			this.direction = 1;
-		}else if(positionPossibleLabyrinthe(this.x, this.y+1) && Math.hypot((this.x-x), this.y-y+1)<distance){
-			this.y++;
-			this.direction = 2;
-		}else if(positionPossibleLabyrinthe(this.x, this.y-1) && Math.hypot((this.x-x), this.y-y-1)<distance){
-			this.y--;
-			this.direction = 0;
+		if(distance <= DISTANCE_DETECTION) {
+			if(positionPossibleLabyrinthe(this.x+1, this.y) && Math.hypot((this.x-x+1), this.y-y)<distance){
+				this.x++;
+				this.direction = 3;
+			}else if(positionPossibleLabyrinthe(this.x-1, this.y) && Math.hypot((this.x-x-1), this.y-y-1)<distance){
+				this.x--;
+				this.direction = 1;
+			}else if(positionPossibleLabyrinthe(this.x, this.y+1) && Math.hypot((this.x-x), this.y-y+1)<distance){
+				this.y++;
+				this.direction = 2;
+			}else if(positionPossibleLabyrinthe(this.x, this.y-1) && Math.hypot((this.x-x), this.y-y-1)<distance){
+				this.y--;
+				this.direction = 0;
+			}
+		}else {
+			Random r=new Random();
+			int alea=r.nextInt(4);
+			if(alea==0 && positionPossibleLabyrinthe(this.x+1, this.y)){
+				this.x++;
+				this.direction = 3;
+			}else if(alea==1 && positionPossibleLabyrinthe(this.x-1, this.y)){
+				this.x--;
+				this.direction = 1;
+			}else if(alea==2 && positionPossibleLabyrinthe(this.x, this.y+1)){
+				this.y++;
+				this.direction = 2;
+			}else if(alea==3 && positionPossibleLabyrinthe(this.x, this.y-1) ){
+				this.y--;
+				this.direction = 0;
+			}
 		}
+		
 		if(compteur == 8) {
 			compteur = 0;
 		} else {
@@ -48,30 +68,6 @@ public class Monstre extends Personnage {
 		}
 	}
 	
-	public boolean explore(int x,int y){
-		boolean[][] visite=new boolean[jeu.getLabyrinthe().getHeight()][jeu.getLabyrinthe().getWidth()];
-		double distance=Math.hypot(this.x-x, this.y-y);
-		if(x==jeu.getHero().getX() && y==jeu.getHero().getY()){
-			return true;
-		}
-		if(positionPossibleLabyrinthe(this.x+1, this.y) && Math.hypot((this.x+1-x), this.y-y)<distance && visite[this.x+1][this.y]){
-			visite[this.x+1][this.y]=true;
-			return explore(this.x+1,this.y);
-		}else if(positionPossibleLabyrinthe(this.x-1, this.y) && Math.hypot((this.x-1-x), this.y-y)<distance && !visite[this.x-1][this.y]){
-			visite[this.x-1][this.y]=true;
-			return explore(this.x-1,this.y);
-		}else if(positionPossibleLabyrinthe(this.x, this.y+1) && Math.hypot((this.x-x), this.y-y+1)<distance && !visite[this.x][this.y+1]){
-			visite[this.x][this.y+1]=true;
-			return explore(this.x,this.y+1);
-		}else if(positionPossibleLabyrinthe(this.x, this.y-1) && Math.hypot((this.x-x), this.y-y-1)<distance && !visite[this.x][this.y-1]){
-			visite[this.x][this.y-1]=true;
-			return explore(this.x,this.y-1);
-		}
-		return false;
-		
-	}
-	
-
 	@Override
 	public void attaquer(Personnage p) {
 		p.setPv(p.getPv()-1);

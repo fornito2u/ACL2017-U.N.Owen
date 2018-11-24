@@ -19,7 +19,7 @@ public class Hero extends Personnage {
 	
 	@Override
 	public void deplacer(int x,int y) {
-		System.out.println(x+" "+y);
+		//System.out.println(x+" "+y);
 		if(this.accessible(x, y)) {
 			this.x += x;
 			this.y += y;
@@ -61,7 +61,7 @@ public class Hero extends Personnage {
 		}
 		if (lab.vortex(destX,destY)) {
 			this.deplacer(this.jeu.getLabyrinthe().getHeight()-2-this.x, this.jeu.getLabyrinthe().getHeight()-2-this.y);
-			System.out.println((this.jeu.getLabyrinthe().getHeight()-2-this.x));
+			//System.out.println((this.jeu.getLabyrinthe().getHeight()-2-this.x));
 			return false;
 		}
 		//Test de colision avec les monstres
