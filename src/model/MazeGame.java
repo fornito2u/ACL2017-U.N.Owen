@@ -157,6 +157,17 @@ public class MazeGame implements Game {
 			herosCanAttack=false;
 		}
 	}
+	
+	private void monstersTryToAttack() {
+		if (monsterCanAttack) {
+			for (Monstre m : monstreList) {
+				if (m.getX() >= hero.getX() - 1 && m.getX() <= hero.getX() + 1 && m.getY() >= hero.getY() - 1 && m.getY() <= hero.getY() + 1) {
+					m.attaquer(this.hero);
+				}
+			}
+			monsterCanAttack=false;
+		}
+	}
 
 
 	/**
@@ -179,6 +190,7 @@ public class MazeGame implements Game {
 			heroTryToAttack();
 		}
 		monstersTryToMove();
+		monstersTryToAttack();
 		supprimerMonstre();
 	}
 	

@@ -151,9 +151,7 @@ public class LabyrinthePainter implements GamePainter {
 
 		crayon.setColor(Color.red);
 		//Affichage de la vie du joueur
-		afficherVie(crayon,this.getHero(),20,17);
-		
-		
+		afficherVie(crayon,this.getHero(),20,17);		
 	}
 
 	public void afficherVie(Graphics2D crayon, Personnage p, int x, int y) {
