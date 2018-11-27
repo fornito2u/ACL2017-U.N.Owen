@@ -12,8 +12,9 @@
   <target name="jar" depends="compile">
     <mkdir dir="exe"/>
     <jar destfile="exe/ACL-2018-Projet.jar" basedir="bin">
+      <fileset dir="res"/>
       <manifest>
-		<attribute name="Main-Class" value="start.Main"/>
+        <attribute name="Main-Class" value="start.Main"/>
       </manifest>
     </jar>
   </target>
@@ -24,8 +25,8 @@
   
   <target name="tests" depends="compile">
     <java jar="lib/junit-platform-console-standalone-1.3.1.jar" fork="true">
-		<arg line="--class-path bin"/>
-        <arg line="--scan-class-path"/>
-	</java>
+      <arg line="--class-path bin"/>
+      <arg line="--scan-class-path"/>
+    </java>
   </target>
 </project>

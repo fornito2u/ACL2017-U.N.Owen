@@ -1,9 +1,6 @@
 package view;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics2D;
-import java.awt.Image;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
@@ -69,10 +66,10 @@ public class LabyrinthePainter implements GamePainter {
 	public void draw(BufferedImage im) {
 		Graphics2D crayon = (Graphics2D) im.getGraphics();
 		//Affichage du labyrinthe
-		Image mur= new ImageIcon("images/mur.png").getImage();
-		Image sol= new ImageIcon("images/sol.png").getImage();
-		Image tresor= new ImageIcon("images/tresor.png").getImage();
-		Image vortex= new ImageIcon("images/vortex.png").getImage();
+		Image mur=Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/mur.png"));
+		Image sol=Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/sol.png"));
+		Image tresor=Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/tresor.png"));
+		Image vortex=Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/vortex.png"));
 		for(int i=0; i<(this.getWidth()-40)/20; i++) {
 			for(int j=0; j<(this.getHeight()-60)/20; j++) {
 				if(!this.labyrinthe.open(i, j)) {
@@ -114,7 +111,7 @@ public class LabyrinthePainter implements GamePainter {
 		crayon.drawString(Integer.toString(this.hero.getPoints())+" points", this.getWidth()/2, 25);
 		
 		//Affichage du joueur
-		Image hero= new ImageIcon("images/hero.png").getImage();
+		Image hero=Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/hero.png"));
 		crayon.drawImage(hero, 
 				(this.hero.getX()*PROPORTION_ECRAN)+DECALAGE_ECRAN_X,
 				(this.hero.getY()*PROPORTION_ECRAN)+DECALAGE_ECRAN_Y-10,
@@ -124,8 +121,8 @@ public class LabyrinthePainter implements GamePainter {
 				this.hero.getCompteur()*30+30,this.hero.getDirection()*30+30,
 				null);
 		//Affichage des monstres
-		Image monstre= new ImageIcon("images/monstre.png").getImage();
-		Image fantom= new ImageIcon("images/fantom.png").getImage();
+		Image monstre=Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/monstre.png"));
+		Image fantom=Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/fantom.png"));
 		
 		for(Monstre m : this.game.getMonstreList()) {	
 			//afficherVie(crayon,m,(m.getX()*PROPORTION_ECRAN)+DECALAGE_ECRAN_X,(m.getY()*PROPORTION_ECRAN)+DECALAGE_ECRAN_Y-10);
