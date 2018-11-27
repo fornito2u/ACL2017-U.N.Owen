@@ -1,5 +1,6 @@
 package model;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -11,6 +12,8 @@ public class Monstre extends Personnage {
 	private int compteur = 0;
 	private static int DISTANCE_DETECTION=7;
 	private int points = 10;
+	private int directionAlea;
+	private final static int marcheAleatoire=10; // % de chance que la direction du monstre change entre chaque etape de deplacement (0<=marcheAleatoire<=100)
 	
 	public Monstre(MazeGame j)
 	{
@@ -24,17 +27,19 @@ public class Monstre extends Personnage {
 		}while(!positionPossibleApparition(newx,newy));
 		this.x=newx;
 		this.y=newy;
+		directionAlea=0;
 	}
 
 	//Pour cette fonction x et y sont les coordonnées du hero
 	@Override
 	public void deplacer(int x, int y) {
 		double distance=Math.hypot(this.x-x, this.y-y);
+		Random r=new Random();
 		if(distance <= DISTANCE_DETECTION) {
 			if(positionPossibleLabyrinthe(this.x+1, this.y) && Math.hypot((this.x-x+1), this.y-y)<distance){
 				this.x++;
 				this.direction = 3;
-			}else if(positionPossibleLabyrinthe(this.x-1, this.y) && Math.hypot((this.x-x-1), this.y-y-1)<distance){
+			}else if(positionPossibleLabyrinthe(this.x-1, this.y) && Math.hypot((this.x-x-1), this.y-y)<distance){
 				this.x--;
 				this.direction = 1;
 			}else if(positionPossibleLabyrinthe(this.x, this.y+1) && Math.hypot((this.x-x), this.y-y+1)<distance){
@@ -45,30 +50,37 @@ public class Monstre extends Personnage {
 				this.direction = 0;
 			}
 		}else {
-			Random r=new Random();
-			int alea=r.nextInt(4);
-			if(alea==0 && positionPossibleLabyrinthe(this.x+1, this.y)){
-				this.x++;
-				this.direction = 3;
-			}else if(alea==1 && positionPossibleLabyrinthe(this.x-1, this.y)){
-				this.x--;
-				this.direction = 1;
-			}else if(alea==2 && positionPossibleLabyrinthe(this.x, this.y+1)){
-				this.y++;
-				this.direction = 2;
-			}else if(alea==3 && positionPossibleLabyrinthe(this.x, this.y-1) ){
-				this.y--;
-				this.direction = 0;
-			}
+			int a=0,b=0;
+			do {
+				if(directionAlea==0 && positionPossibleLabyrinthe(this.x+1, this.y)){
+					a++;
+					this.direction = 3;
+				}else if(directionAlea==1 && positionPossibleLabyrinthe(this.x-1, this.y)){
+					a--;
+					this.direction = 1;
+				}else if(directionAlea==2 && positionPossibleLabyrinthe(this.x, this.y+1)){
+					b++;
+					this.direction = 2;
+				}else if(directionAlea==3 && positionPossibleLabyrinthe(this.x, this.y-1) ){
+					b--;
+					this.direction = 0;
+				}else {
+					directionAlea=r.nextInt(4);
+				}
+			}while(a==0 && b==0);
+			this.x+=a;
+			this.y+=b;
 		}
-		
+		if(r.nextInt(100)<marcheAleatoire) {
+			directionAlea=r.nextInt(4);
+			System.out.println("bip");
+		}
 		if(compteur == 8) {
 			compteur = 0;
 		} else {
 			compteur++;
 		}
 	}
-	
 	@Override
 	public void attaquer(Personnage p) {
 		p.setPv(p.getPv()-1);

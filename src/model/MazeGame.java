@@ -28,7 +28,7 @@ public class MazeGame implements Game {
 	private static int HEROS_ATTACK_COOLDOWN=3; //60ms
 	private static int MONSTER_ATTACK_COOLDOWN=8; //160ms
 	private static int FANTOM_ATTACK_COOLDOWN=10; //200ms
-	private static int NB_FANTOM = 3;
+	private static int NB_FANTOM = 0;
 
 	private boolean herosCanMove;
 	private boolean monsterCanMove;
