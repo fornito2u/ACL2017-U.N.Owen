@@ -1,0 +1,10 @@
+Backlog de la version 3.0 (Sprint 3) :
+- Gestion des mouvements des monstres (Darmois Victor)
+- Suppression des monstres quand ils meurent (Darmois Victor)
+- Amélioration de l'attaque du héro (Marvin Fornito)  
+- Ajout des fantômes (Marvin Fornito)
+- Gestion du labyrinthe aléatoire (Clément Koch)
+- Ajout de cooldowns pour les déplacements et les attaques (Bellanger Clément)
+- Ajout des sprites (Clément Koch)
+- Rédaction du backlog de la version 3.0 (Fornito Marvin / Darnois Victor / Koch Clément / Bellanger Clément)
+- Création du diaporama de la soutenance du projet (Marvin Fornito / Bellanger Clément)
