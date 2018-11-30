@@ -308,6 +308,12 @@ public class Labyrinthe {
 			//Position aléatoire du trésor
 			this.goalX = r.nextInt(this.width);
 			this.goalY = r.nextInt(this.height);
+			while(this.goalX == 30 || this.goalX == 1){
+				this.goalX = r.nextInt(this.width);
+			}
+			while(this.goalY == 30 || this.goalY == 1){
+				this.goalY = r.nextInt(this.width);
+			}
 			boolean goal = false;
 			//Position aléatoire d'un vortex
 			this.vortexX = r.nextInt(this.width);
@@ -319,15 +325,12 @@ public class Labyrinthe {
 			this.murs = new int[this.width][this.height];
 			line =  br.readLine();
 			while(line != null) {
+				
 				for(int j=0; j<this.width; j++) {
 					if(j == goalX && i == goalY || goal) {
 						if(line.charAt(j) == 'X') {
 							goal = true;
-							if(line.charAt(j) == 'X') {
-								this.murs[j][i]=1;
-							} else {
-								this.murs[j][i]=0;
-							}
+							this.murs[j][i]=1;
 						} else {
 							this.murs[j][i] = 2;
 							this.goalX = j;
