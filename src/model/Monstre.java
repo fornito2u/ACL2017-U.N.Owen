@@ -73,7 +73,7 @@ public class Monstre extends Personnage {
 		}
 		if(r.nextInt(100)<marcheAleatoire) {
 			directionAlea=r.nextInt(4);
-			System.out.println("bip");
+			//System.out.println("bip");
 		}
 		if(compteur == 8) {
 			compteur = 0;

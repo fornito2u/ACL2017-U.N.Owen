@@ -224,6 +224,7 @@ public class MazeGame implements Game {
 		if(this.hero.getX()*20 == this.labyrinthe.getGoalX() && this.hero.getY()*20 == this.labyrinthe.getGoalY()) {
 			this.changeLevel();
 			this.hero.increasePoints(this.level*50);
+			this.hero.setPv(20);
 			Thread.sleep(1000);
 			return false;
 			
