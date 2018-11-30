@@ -323,11 +323,11 @@ public class Labyrinthe {
 					if(j == goalX && i == goalY || goal) {
 						if(line.charAt(j) == 'X') {
 							goal = true;
-							if(line.charAt(j) == 'X') {
+							//if(line.charAt(j) == 'X') {
 								this.murs[j][i]=1;
-							} else {
-								this.murs[j][i]=0;
-							}
+							//} else {
+								//this.murs[j][i]=0;
+							//}
 						} else {
 							this.murs[j][i] = 2;
 							this.goalX = j;
